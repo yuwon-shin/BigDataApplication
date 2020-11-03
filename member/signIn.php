@@ -64,6 +64,8 @@
 
                     if ($row != null) {
                         $_SESSION['ses_user'] = $row['memberNickName'];
+                        $_SESSION['ses_index'] = $row['memberIdx'];
+                        $_SESSION['ses_email'] = $row['memberEmail'];
                         echo '<br>';
                         echo $_SESSION['ses_user'].'님 안녕하세요.<br><br><br>';
                         echo '<input type = "button" value = "메인페이지로 이동" onclick = "location.href= \'../mainPage/index.php\'"> <br><br>';
