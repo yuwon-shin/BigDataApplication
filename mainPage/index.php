@@ -5,20 +5,28 @@
 
 <!DOCTYPE html>
 <html lang="ko">
-    <div align = right>
+    <div align = right style="padding-right: 40px">
     <?php
         if(isset($_SESSION['ses_user'])){
         echo '<br>';
         echo $_SESSION['ses_user'].'님 안녕하세요 <br>';
-        echo '<input type = "button" value = "마이페이지" onclick = "location.href= \'../member/myPage.php\'"><br>';    
-        echo '<input type = "button" value = "로그아웃" onclick = "location.href= \'../member/signOut.php\'">';        
-        }
-        else{
-            echo '<br>';
-            echo '<input type = "button" value = "로그인/회원가입" onclick = "location.href= \'../member/main.php\'">';
+    ?>
+    <div class = "button">
+    <input class = "button1" type = "button" value = "마이페이지" onclick = "location.href= '../myPage/myInfo.php'">    
+    <input class = "button1" type = "button" value = "로그아웃" onclick = "location.href= '../member/signOut.php'"> 
+
+    <?php
 
         }
+        else{
     ?>
+    <br>
+    <input class = "button2" type = "button" value = "로그인/회원가입" onclick = "location.href= '../member/main.php'">
+
+    <?php
+        }
+    ?>
+    </div>
     </div>
     <head> 
         <meta http-equiv="Content-Type"
@@ -39,6 +47,34 @@
         }
         table .even{
             background: #efefef;
+        }
+        .button{
+            width: 100px;
+            height: 20px;
+            text-align: center;
+            margin-top:8px;
+            }
+        .button1{
+            height: 32px;
+            width: 90px;
+            font-size: 13px;
+            text-align: center;
+            margin-bottom: 5px;
+            background-color: white;
+            border: 2px solid black;
+            border-radius: 4px
+
+        }
+        .button2{
+            height: 30px;
+            width: 120px;
+            font-size: 13px;
+            text-align: center;
+            margin-bottom: 5px;
+            background-color: white;
+            border: 2px solid black;
+            border-radius: 4px
+
         }
         .text {
             font-size: 15px;
@@ -105,7 +141,7 @@
 
                 <td width = "50" align = "center"><?php echo $rows['testIdx']?></td>
                 <td width = "500" align = "center">
-                <a href = "joinTest.php?testIdx =<?php echo $rows['testIdx']?>">
+                <a href = "joinTest.php?testIdx=<?php echo $rows['testIdx']?>">
                 <?php echo $rows['testTitle']?></a></td>
                 <td width = "100" align = "center"><?php echo $rows['testCategory']?></td>
 
@@ -148,7 +184,7 @@
         <?php
         if(isset($_SESSION['ses_user'])){
             ?>
-        <font style = "cursor: pointer" onclick = "location.href= 'newTest.php'">테스트 만들기</font>
+        <font style = "cursor: pointer" onclick = "location.href= 'test.php'">테스트 만들기</font>
         <?php
         }?>
     </div>

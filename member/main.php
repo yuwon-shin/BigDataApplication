@@ -28,8 +28,22 @@
             background-color: black;
             padding: 30px;
         }
+
+        .button{
+            height: 35px;
+            width: 90px;
+            font-size: 13px;
+            color: white;
+            text-align: center;
+            margin-top: 30px;
+            background-color: #373737;
+            border: 3px solid #efefef;
+            border-radius: 4px
+
+        }
         .font {
             color: white;
+            font-size: 18px;
             font-family: 'HeirofLightBold';
         }
     </style>
@@ -52,12 +66,10 @@
                     <input type="password" name="memberPw" class="memberPw" />
                 </div><br/>
             </div>
-            <div class="line">
-                <input type="submit" value="로그인" class="submit" />
-            </div>
-        </form><br><br>
-        <button type = "button" onclick = "location.href= './signUp.php'">회원가입</button>
-    </div>
+                <input class = "button" type="submit" value="로그인">
+                <button class = "button" type = "button" onclick = "location.href= './signUp.php'">회원가입</button>
+       </form>     
+     </div>
 </div>
 
 </body>

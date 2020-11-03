@@ -45,7 +45,24 @@
             background-color: white; 
             padding: 30px;
         }
-       
+       .button{
+            width: 100px;
+            height: 20px;
+            text-align: center;
+            margin: auto;
+            margin-top:8px;
+            }
+            .button1{
+            height: 35px;
+            width: 90px;
+            font-size: 13px;
+            color: white;
+            text-align: center;
+            background-color: black;
+            border: 3px solid #373737;
+            border-radius: 8px
+
+        }
     </style>
 </head>
 
@@ -65,16 +82,22 @@
                     if ($row != null) {
                         $_SESSION['ses_user'] = $row['memberNickName'];
                         echo '<br>';
-                        echo $_SESSION['ses_user'].'님 안녕하세요.<br><br><br>';
-                        echo '<input type = "button" value = "메인페이지로 이동" onclick = "location.href= \'../mainPage/index.php\'"> <br><br>';
-                        echo '<input type = "button" value = "로그아웃" onclick = "location.href= \'./signOut.php\'">';
+                        echo $_SESSION['ses_user'].'님 안녕하세요.<br><br><br><br>';
+                    ?>
+
+                        <input class = "button1" type = "button" value = "메인페이지" onclick = "location.href= '../mainPage/index.php'">
+                        <input class = "button1" type = "button" value = "로그아웃" onclick = "location.href= './signOut.php'">
+
+                    <?php
                     }
 
                     if($row == null){
-                        echo '<br>[로그인 실패] 아이디와 비밀번호가 일치하지 않습니다.<br><br><br><br><br>';
-                        echo '<input type = "button" value = "돌아가기" onclick = "location.href= \'./main.php\'">';
-                    }
-            ?>
+                        echo '<br>[로그인 실패] 아이디와 비밀번호가 일치하지 않습니다.<br><br><br><br>';?>
+
+                        <input class = "button1" type = "button" value = "돌아가기" onclick = "location.href= './main.php'">
+
+                    <?php } ?>
+
             </div>
         </div>
     </div>
