@@ -137,13 +137,26 @@ $res3 = mysqli_query($conn, $query2);
 ?>
 
 <?php
-$query3 = "select testIdx, MAX(testScYN) testScYN from
-(SELECT
-t.testIdx
-, case when sc.tbMember_memberIdx = {$_SESSION['ses_index']} then 1 else 0 end as testScYN
-FROM tbTest t
-left outer join tbTestScrap sc on t.testIdx = sc.tbTest_testIdx) a group by testIdx";
-$res4 = mysqli_query($conn, $query3);
+if(isset($_SESSION['ses_index'])){
+
+    $query3 = "select testIdx, MAX(testScYN) testScYN from
+                (SELECT
+                t.testIdx
+                , case when sc.tbMember_memberIdx = {$_SESSION['ses_index']} then 1 else 0 end as testScYN
+                FROM tbTest t
+                left outer join tbTestScrap sc on t.testIdx = sc.tbTest_testIdx) a group by testIdx";
+    $res4 = mysqli_query($conn, $query3);
+}else{
+    //로그인 안했을 경우 index 0으로 부여 (에러 발생 방지)
+    $_SESSION['ses_index']=0;
+    $query3 = "select testIdx, MAX(testScYN) testScYN from
+                (SELECT
+                t.testIdx
+                , case when sc.tbMember_memberIdx = {$_SESSION['ses_index']} then 1 else 0 end as testScYN
+                FROM tbTest t
+                left outer join tbTestScrap sc on t.testIdx = sc.tbTest_testIdx) a group by testIdx";
+    $res4 = mysqli_query($conn, $query3);
+}
 ?>
 
 <h2 align = center> 설문조사 LIST </h2>

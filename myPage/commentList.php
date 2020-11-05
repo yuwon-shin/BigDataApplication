@@ -16,9 +16,12 @@
         <div>
 
 
-            <?php 
-                $query = "select commentIdx,commentCont,commentDate from tbComment;";
+            <?php
+                //댓글 목록
+                $query = "select commentIdx,commentCont,commentDate from tbComment where tbMember_memberIdx = '".$_SESSION['ses_index']."'";
                 $result = mysqli_query($conn,$query);
+
+
             
 
                 if($result){

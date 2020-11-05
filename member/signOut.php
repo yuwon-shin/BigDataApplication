@@ -65,6 +65,10 @@
 
 				    if($_SESSION['ses_user']){
 				    	unset($_SESSION['ses_user']);
+				    	unset($_SESSION['ses_name']);
+                        unset($_SESSION['ses_index']);
+                        unset($_SESSION['ses_email']);
+                        unset($_SESSION['ses_pw']);
 				        echo "<script> alert('로그아웃 완료'); self.close(); </script>";
 				        
 				    }?> 

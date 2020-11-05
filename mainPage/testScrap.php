@@ -12,10 +12,16 @@
     else{
 
         if($scrap==0){
+            if($_SESSION['ses_index']==0){
+                echo "<script> alert('로그인 후 이용해주세요'); location.href='../member/main.php'; </script>";
+            }
             $sql = "insert into tbTestScrap (tbMember_memberIdx,tbTest_testIdx) values ('".$_SESSION['ses_index']."', '".$testIdx."')";
             $res = mysqli_query($conn,$sql);
             if ($res === TRUE) {
-                echo "<script> alert('찜 했습니다'); location.href='index.php'; </script>";
+
+                    echo "<script> alert('찜 했습니다'); location.href='index.php'; </script>";
+
+
             } else {
                 printf("Could not insert record: %s\n",mysqli_error($conn));
             }
