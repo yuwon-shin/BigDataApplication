@@ -36,6 +36,26 @@
         color: white;
         font-family: 'HeirofLightBold';
     }
+    .button{
+          width: 100px;
+          height: 20px;
+          text-align: center;
+          margin: auto;
+          margin-top:8px;
+          }
+    .button1{
+          height: 35px;
+          width: 90px;
+          font-size: 13px;
+          color: white;
+          text-align: center;
+          margin-bottom: 10px;
+          background-color: #373737;
+          border: 3px solid #efefef;
+          border-radius: 4px
+
+      }
+
     table {
       margin-left: auto;
       margin-right: auto;
@@ -73,9 +93,10 @@
           </tr>
          </table>
          <br><br>
-          <input type=submit value="가입하기">
-          <input type=reset value="초기화">
-
+         
+          <input class = "button1"type=submit value="가입하기">
+          <input class = "button1"type=reset value="초기화">
+        
       </div> 
     </form>
   </div>

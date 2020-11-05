@@ -38,26 +38,31 @@
         <br>
         <h2 align="center">마이페이지</h2>
         
-        <form id="updateForm" method="post" action="<%=request.getContextPath()%>/update.me">
-            <table>
+        <form id="updateForm" method="post" action="updatePw.php">
+            <table align='center'>
                 <tr>
-                    <td>* 이름</td>
-                    <td><input type="text" name="userName" value= "<?php echo $_SESSION['ses_user']; ?>" required></td>
+                    <td>* 기존 비밀번호</td>
+                    <td><input type="text" name="originPw" required></td>
                     <td></td>
                 </tr>
                 <tr>
-                    <td>이메일</td>
-                    <td><input type="email" name="email" value= "<?php echo $_SESSION['ses_email']; ?>"> </td>
+                    <td>새 비밀번호</td>
+                    <td><input type="text" name="newPw" required></td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>새 비밀번호 확인</td>
+                    <td><input type="text" name="newPw2"> </td>
                     <td></td>
                 </tr>
             </table>
             <br>
             
             <div class="btns" align="center">
-                <button type="submit" id="updateBtn">수정하기</button>
+                <button type="submit" id="updatePwBtn">비밀번호 변경하기</button>
+
+                <input type="button" value = "회원정보 수정하기" id="updateBtn" onclick="location.href='editProfile.php';"></input>
                 
-                <button type="button" id="pwdUpdateBtn" onclick="">비밀번호 변경</button>
-                <button type="button" id="deleteBtn" onclick="">탈퇴하기</button>
             </div>
         </form>
     </div>
