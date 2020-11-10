@@ -1,38 +1,38 @@
 <?php
-    include '../include/dbConnect.php';
-    include '../include/session.php';
+include '../include/dbConnect.php';
+include '../include/session.php';
 ?>
 
 <!DOCTYPE html>
 <html lang="ko">
-    <div align = right style="padding-right: 40px">
+<div align = right style="padding-right: 40px">
     <?php
-        if(isset($_SESSION['ses_user'])){
-        echo '<br>';
-        echo $_SESSION['ses_user'].'님 안녕하세요 <br>';
+    if(isset($_SESSION['ses_user'])){
+    echo '<br>';
+    echo $_SESSION['ses_user'].'님 안녕하세요 <br>';
     ?>
     <div class = "button">
-    <input class = "button1" type = "button" value = "마이페이지" onclick = "location.href= '../myPage/myInfo.php'">    
-    <input class = "button1" type = "button" value = "로그아웃" onclick = "location.href= '../member/signOut.php'"> 
+        <input class = "button1" type = "button" value = "마이페이지" onclick = "location.href= '../myPage/myInfo.php'">
+        <input class = "button1" type = "button" value = "로그아웃" onclick = "location.href= '../member/signOut.php'">
 
-    <?php
+        <?php
 
         }
         else{
-    ?>
-    <br>
-    <input class = "button2" type = "button" value = "로그인/회원가입" onclick = "location.href= '../member/main.php'">
+            ?>
+            <br>
+            <input class = "button2" type = "button" value = "로그인/회원가입" onclick = "location.href= '../member/main.php'">
 
-    <?php
+            <?php
         }
-    ?>
+        ?>
     </div>
-    </div>
-    <head> 
-        <meta http-equiv="Content-Type"
-            content="text/html; charset=UTF-8" /> 
-        <title>Main Page</title>
-        <style>
+</div>
+<head>
+    <meta http-equiv="Content-Type"
+          content="text/html; charset=UTF-8" />
+    <title>Main Page</title>
+    <style>
         table{
             border-top: 1px solid #444444;
             border-collapse: collapse;
@@ -53,7 +53,7 @@
             height: 20px;
             text-align: center;
             margin-top:8px;
-            }
+        }
         .button1{
             height: 32px;
             width: 90px;
@@ -84,110 +84,194 @@
         .text:hover{
             text-decoration: underline;
         }
+
+        .heart {
+            width: 500px;
+            height: 500px;
+            background: #ea2027;
+            position: relative;
+            transform: rotate(45deg);
+        }
+        .heart::before,
+        .heart::after {
+            content: "";
+            width: 500px;
+            height: 500px;
+            position: absolute;
+            border-radius: 50%;
+            background: #ea2027;
+        }
+        .heart::before {
+            left: -50%;
+        }
+        .heart::after {
+            top: -50%;
+        }
+
         a:link {color : black; text-decoration:none;}
         a:hover { text-decoration : underline;}
 
-        </style>
-    </head>
+    </style>
+</head>
 
-    <body>
-        <h1 align = center>Main Page <br><br></h1>
-        
-            <?php 
-            $query = "SELECT `testIdx`, `testDate`, `testTitle`, `testCategory`, `hit`,`tbMember_memberIdx` FROM `tbtest` order by testIdx ";
-            $res = mysqli_query($conn,$query);
-            $total = mysqli_num_rows($res);
-            ?>
+<body>
+<h1 align = center>Main Page <br><br></h1>
 
-            <?php
+<?php
+$query = "SELECT `testIdx`, `testDate`, `testTitle`, `testCategory`, `hit`,`tbMember_memberIdx` FROM `tbtest` order by testIdx ";
+$res = mysqli_query($conn,$query);
+$total = mysqli_num_rows($res);
+?>
 
-            $query1 = "select b.testIdx, count(a.tbTest_testIdx) as cnt from tbTestScrap  a RIGHT JOIN tbtest b ON a.tbTest_testIdx = b.testIdx group by tbTest_testIdx order by b.testIdx";
-            $res2 = mysqli_query($conn, $query1);
-            ?>
+<?php
 
-            <?php
+$query1 = "select testIdx, count(sc.tbTest_testIdx) as cnt from tbTest as t 
+left outer join tbTestScrap as sc on t.testIdx=sc.tbTest_testIdx
+group by testIdx";
+$res2 = mysqli_query($conn, $query1);
+?>
 
-            $query2 = "select a.testIdx, a.tbMember_memberIdx, b.memberNickName from tbtest a INNER JOIN tbMember b ON a.tbMember_memberIdx = b.memberIdx order by a.testIdx";
-            $res3 = mysqli_query($conn, $query2);
-            ?>
+<?php
+$query2 = "select a.testIdx, a.tbMember_memberIdx, b.memberNickName from tbtest a INNER JOIN tbMember b ON a.tbMember_memberIdx = b.memberIdx order by a.testIdx";
+$res3 = mysqli_query($conn, $query2);
+?>
 
-        <h2 align = center> 설문조사 LIST </h2>
-        <table align = center>
-            <thead align = "center">
-            <tr>
-                <td width = "50" align="center">번호</td>
-                <td width = "400" align = "center">제목</td>
-                <td width = "100" align = "center">카테고리</td>
-                <td width = "100" align = "center">작성자</td>
-                <td width = "200" align = "center">날짜</td>
-                <td width = "50" align = "center">조회수</td>
-                <td width = "80" align = "center">테스트찜</td>
-            </tr>
-            </thead>
+<?php
+if(isset($_SESSION['ses_index'])){
 
-            <tbody>
-            <?php
+    $query3 = "select testIdx, MAX(testScYN) testScYN from
+                (SELECT
+                t.testIdx
+                , case when sc.tbMember_memberIdx = {$_SESSION['ses_index']} then 1 else 0 end as testScYN
+                FROM tbTest t
+                left outer join tbTestScrap sc on t.testIdx = sc.tbTest_testIdx) a group by testIdx";
+    $res4 = mysqli_query($conn, $query3);
+}else{
+    //로그인 안했을 경우 index 0으로 부여 (에러 발생 방지)
+    $_SESSION['ses_index']=0;
+    $query3 = "select testIdx, MAX(testScYN) testScYN from
+                (SELECT
+                t.testIdx
+                , case when sc.tbMember_memberIdx = {$_SESSION['ses_index']} then 1 else 0 end as testScYN
+                FROM tbTest t
+                left outer join tbTestScrap sc on t.testIdx = sc.tbTest_testIdx) a group by testIdx";
+    $res4 = mysqli_query($conn, $query3);
+}
+?>
+
+<h2 align = center> 설문조사 LIST </h2>
+<table align = center>
+    <thead align = "center">
+    <tr>
+        <td width = "50" align="center">번호</td>
+        <td width = "400" align = "center">제목</td>
+        <td width = "100" align = "center">카테고리</td>
+        <td width = "100" align = "center">작성자</td>
+        <td width = "200" align = "center">날짜</td>
+        <td width = "50" align = "center">조회수</td>
+        <td width = "80" align = "center">테스트찜</td>
+        <td width = "80" align = "center">찜</td>
+    </tr>
+    </thead>
+
+    <tbody>
+    <?php
 
 
-        		if($res){
-                while($rows=mysqli_fetch_array($res,MYSQLI_ASSOC)){
+    if($res){
+        while($rows=mysqli_fetch_array($res,MYSQLI_ASSOC)){
 
-                    if($total%2==0){
-            ?>        <tr class = "even">
+            if($total%2==0){
+                ?>        <tr class = "even">
             <?php   }
-                    else{
-            ?>        <tr>
-                    <?php } ?>
+            else{
+                ?>        <tr>
+            <?php } ?>
 
-                <td width = "50" align = "center"><?php echo $rows['testIdx']?></td>
-                <td width = "500" align = "center">
+            <td width = "50" align = "center"><?php echo $rows['testIdx']?></td>
+
+            <td width = "500" align = "center">
                 <a href = "joinTest.php?testIdx=<?php echo $rows['testIdx']?>">
-                <?php echo $rows['testTitle']?></a></td>
-                <td width = "100" align = "center"><?php echo $rows['testCategory']?></td>
+                    <?php echo $rows['testTitle']?></a></td>
 
-                <?php
-               while($rows3=mysqli_fetch_array($res3,MYSQLI_ASSOC)){
-               
-                    ?>
+            <td width = "100" align = "center"><?php echo $rows['testCategory']?></td>
+
+            <?php
+            while($rows3=mysqli_fetch_array($res3,MYSQLI_ASSOC)){
+
+                ?>
                 <td width = "100" align = "center"><?php echo $rows3['memberNickName']?></td>
 
                 <?php
-                    break;
-                }
-                ?>
-                <td width = "200" align = "center"><?php echo $rows['testDate']?></td>
-                <td width = "50" align = "center"><?php echo $rows['hit']?></td>
-                
-                <?php
-               while($rows2=mysqli_fetch_array($res2,MYSQLI_ASSOC)){
-               
-                    ?>
-                <td width = "80" align = "center"><?php echo $rows2['cnt']?></td></tr>
-                <?php
-                   break;
-                    }
-                $total--;
-
-                }
-                }
-                ?>
-            </tbody>
-        </table>
-
-        <?php
-        	mysqli_free_result($res);
-            mysqli_free_result($res2);
-        	mysqli_close($conn)
-        ?>
-
-    <div class = text>
-        <?php
-        if(isset($_SESSION['ses_user'])){
+                break;
+            }
             ?>
+            <td width = "200" align = "center"><?php echo $rows['testDate']?></td>
+            <td width = "50" align = "center"><?php echo $rows['hit']?></td>
+
+
+            <?php
+            while($rows2=mysqli_fetch_array($res2,MYSQLI_ASSOC)){
+
+                ?>
+                <td width = "80" align = "center"><?php echo $rows2['cnt']?></td>
+
+                <?php
+                break;
+            }
+            ?>
+
+
+
+
+            <?php
+            while($rows4=mysqli_fetch_array($res4,MYSQLI_ASSOC)){
+
+                ?>
+                <td width = "50" align = "center">
+                    <?php
+                    if ($rows4['testScYN']){ ?>
+                        <form method = "post">
+                            <input class = "button1" type="button" name="insertscrap" value = "찜취소" onclick = "location.href= 'testScrap.php?scrap=1&testIdx=<?php echo $rows['testIdx']?>'">
+                        </form>
+
+                        <?php
+                    }else{?>
+                        <form method = "post">
+                            <input class = "button1" type = "button"  name="deletescrap"  value = "찜하기" onclick = "location.href= 'testScrap.php?scrap=0&testIdx=<?php echo $rows['testIdx']?>'">
+                        </form>
+                        <?php
+                    }
+
+                    ?>
+                </td></tr>
+                <?php
+                break;
+            }
+
+
+            $total--;
+
+        }
+    }
+    ?>
+    </tbody>
+</table>
+
+<?php
+mysqli_free_result($res);
+mysqli_free_result($res2);
+mysqli_close($conn)
+?>
+
+<div class = text>
+    <?php
+    if(isset($_SESSION['ses_user'])){
+        ?>
         <font style = "cursor: pointer" onclick = "location.href= 'test.php'">테스트 만들기</font>
         <?php
-        }?>
-    </div>
+    }?>
+</div>
 
-    </body>
+</body>
 </html>

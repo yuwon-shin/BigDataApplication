@@ -81,6 +81,11 @@
 
                     if ($row != null) {
                         $_SESSION['ses_user'] = $row['memberNickName'];
+                        $_SESSION['ses_name'] = $row['memberName'];
+                        $_SESSION['ses_index'] = $row['memberIdx'];
+                        $_SESSION['ses_email'] = $row['memberEmail'];
+                        $_SESSION['ses_pw'] = $row['memberPw'];
+                        
                         echo '<br>';
                         echo $_SESSION['ses_user'].'님 안녕하세요.<br><br><br><br>';
                     ?>
