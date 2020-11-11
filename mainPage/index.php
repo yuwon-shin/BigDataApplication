@@ -144,7 +144,7 @@ if(isset($_SESSION['ses_index'])){
                 t.testIdx
                 , case when sc.tbMember_memberIdx = {$_SESSION['ses_index']} then 1 else 0 end as testScYN
                 FROM tbTest t
-                left outer join tbTestScrap sc on t.testIdx = sc.tbTest_testIdx) a group by testIdx";
+                left outer join tbTestScrap sc on t.testIdx = sc.tbTest_testIdx) a group by testIdx order by testIdx";
     $res4 = mysqli_query($conn, $query3);
 }else{
     //로그인 안했을 경우 index 0으로 부여 (에러 발생 방지)

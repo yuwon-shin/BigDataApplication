@@ -42,17 +42,17 @@
             <table align='center'>
                 <tr>
                     <td>* 기존 비밀번호</td>
-                    <td><input type="text" name="originPw" required></td>
+                    <td><input type="password" name="originPw" required></td>
                     <td></td>
                 </tr>
                 <tr>
                     <td>새 비밀번호</td>
-                    <td><input type="text" name="newPw" required></td>
+                    <td><input type="password" name="newPw" required></td>
                     <td></td>
                 </tr>
                 <tr>
                     <td>새 비밀번호 확인</td>
-                    <td><input type="text" name="newPw2"> </td>
+                    <td><input type="password" name="newPw2"> </td>
                     <td></td>
                 </tr>
             </table>
