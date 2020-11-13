@@ -9,6 +9,10 @@
 
     $_SESSION['ses_user'] = $row['memberNickName'];
     $_SESSION['ses_name'] = $row['memberName'];
+    $_SESSION['ses_sex'] = $row['memberSex'];
+    $_SESSION['ses_age'] = $row['memberAge'];
+    $_SESSION['ses_job'] = $row['memberJob'];
+
 ?>
 
 <!DOCTYPE html>
@@ -72,12 +76,30 @@
                 <tr>
                     <td class='font'>* 이름</td>
                     <td><input type="text" name="userName" value= "<?php echo $_SESSION['ses_name']; ?>" required></td>
-                    <td></td>
                 </tr>
                 <tr>
                     <td class='font'>닉네임</td>
                     <td><input type="text" name="userNickName" value= "<?php echo $_SESSION['ses_user']; ?>" required></td>
-                    <td></td>
+                </tr>
+                <tr>
+                    <td class='font'>성별</td>
+                    <td><label><font color = white>여성</font><input type="radio" name = "userSex" value = "여성"></label>
+                        <label><font color = white>&nbsp;남성</font><input type="radio" name = "userSex" value = "남성"></label></td>
+                </tr>
+                <tr>
+                    <td class='font'>나이</td>
+                    <td><input type="text" name="userAge" value= "<?php echo $_SESSION['ses_age']; ?>" required></td>
+                </tr>
+                <tr>
+                    <td class='font'>관심계열</td>
+                    <td><label><font color = white>이공계열</font><input type="radio" name = "userJob" value = "이공계열"></label>
+                        <label><font color = white>&nbsp;인문계열</font><input type="radio" name = "userJob" value = "인문계열"></label>
+                        <label><font color = white>&nbsp;사회계열</font><input type="radio" name = "userJob" value = "사회계열"></label>
+                        <label><font color = white>&nbsp;의약계열</font><input type="radio" name = "userJob" value = "의약계열"></label><br>
+                        <label><font color = white>예체능계열</font><input type="radio" name = "userJob" value = "예체능계열"></label>
+                        <label><font color = white>&nbsp;교육계열</font><input type="radio" name = "userJob" value = "교육계열"></label>
+                        <label><font color = white>&nbsp;직장인</font><input type="radio" name = "userJob" value = "직장인"></label>
+                    </td>
                 </tr>
             
 

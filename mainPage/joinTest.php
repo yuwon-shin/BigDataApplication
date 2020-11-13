@@ -31,7 +31,7 @@
             mysqli_query($conn,$hit)
 //            $user = $_SESSION['ses_user'];
          ?>
-    <head > 
+    <head>
         <title>Join Test <?=$testIdx?></title>
         <style>
             table{
@@ -110,11 +110,13 @@
                     <tr>
                         <td height=50 width = "120" align="center" bgcolor=#ccc><font color=white >문항번호</font></td>
                         <td height=50 width = "700" align = "center" bgcolor=#ccc><font color=white>문항</font></td>
-                        <td height=50 width = "70" align = "center" bgcolor=#ccc><font color=white>1</font></td>
-                        <td height=50 width = "70" align = "center" bgcolor=#ccc><font color=white>2</font></td>
-                        <td height=50 width = "70" align = "center" bgcolor=#ccc><font color=white>3</font></td>
-                        <td height=50 width = "70" align = "center" bgcolor=#ccc><font color=white>4</font></td>
-                        <td height=50  width = "70" align = "center" bgcolor=#ccc><font color=white>5</font></td>
+                        <td height=50 width = "120" align = "center" bgcolor=#ccc><font color=white></font></td>
+                        <td height=50 width = "50" align = "center" bgcolor=#ccc><font color=white>1</font></td>
+                        <td height=50 width = "50" align = "center" bgcolor=#ccc><font color=white>2</font></td>
+                        <td height=50 width = "50" align = "center" bgcolor=#ccc><font color=white>3</font></td>
+                        <td height=50 width = "50" align = "center" bgcolor=#ccc><font color=white>4</font></td>
+                        <td height=50  width = "50" align = "center" bgcolor=#ccc><font color=white>5</font></td>
+                        <td height=50 width = "120" align = "center" bgcolor=#ccc><font color=white></font></td>
                     </tr>
                 </thead>
 
@@ -128,11 +130,13 @@
                         <tr>
                             <td height=30 width = "120" align = "center"><?php echo $i?></td>
                             <td height=30 width = "700" align = "center"><?php echo $rows['question'.$i]?></td>
-                            <td height=30 width = "70" align = "center"><input type = "radio" name = "answer<?php echo $i;?>" value = "1" ></td>
-                            <td height=30 width = "70" align = "center"><input type = "radio" name = "answer<?php echo $i;?>" value = "2"></td>
-                            <td height=30 width = "70" align = "center"><input type = "radio" name = "answer<?php echo $i;?>" value = "3"></td>
-                            <td height=30 width = "70" align = "center"><input type = "radio" name = "answer<?php echo $i;?>" value = "4"></td>
-                            <td height=30 width = "70" align = "center"><input type = "radio" name = "answer<?php echo $i;?>" value = "5"></td>
+                            <td height=30 width = "120" align = "center"><?php echo $rows['label'.$i.'_1']?></td>
+                            <td height=30 width = "50" align = "center"><input type = "radio" name = "answer<?php echo $i;?>" value = "1" ></td>
+                            <td height=30 width = "50" align = "center"><input type = "radio" name = "answer<?php echo $i;?>" value = "2"></td>
+                            <td height=30 width = "50" align = "center"><input type = "radio" name = "answer<?php echo $i;?>" value = "3"></td>
+                            <td height=30 width = "50" align = "center"><input type = "radio" name = "answer<?php echo $i;?>" value = "4"></td>
+                            <td height=30 width = "50" align = "center"><input type = "radio" name = "answer<?php echo $i;?>" value = "5"></td>
+                            <td height=30 width = "120" align = "center"><?php echo $rows['label'.$i.'_5']?></td>
                         </tr>
                 <?php
                     $i++;

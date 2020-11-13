@@ -7,6 +7,9 @@ include "../include/dbConnect.php";
  $memberPw2=$_POST['memberPw2'];
  $memberName=$_POST['memberName'];
  $memberNickName=$_POST['memberNickName'];
+ $memberSex = $_POST['memberSex'];
+ $memberAge = $_POST['memberAge'];
+ $memberJob = $_POST['memberJob'];
  ?>
 
 
@@ -71,9 +74,9 @@ include "../include/dbConnect.php";
 			 <?php
 
 			 //이메일 중복 검사
-			 $sql = "SELECT * FROM tbMemeber WHERE memberEmail = '{$memberEmail}'";
+			 $sql = "SELECT * FROM tbMember WHERE memberEmail = '{$memberEmail}'";
 			 $res = mysqli_query($conn, $sql);
-			 if($res){
+			 if(mysqli_num_rows($res)>=1){
 			 	 echo "이미 가입된 이메일입니다.<br><br><br>"; ?>
 			 	 <input class = "button" type = "button" value = "돌아가기" onclick = "location.href= './signUp.php'">
 			 <?php	exit();
@@ -108,7 +111,8 @@ include "../include/dbConnect.php";
 			<?php
 
 
-			 $sql = "insert into tbMember (memberName, memberNickName, memberEmail, memberPw) values('$memberName','$memberNickName', '$memberEmail','$memberPw')";
+			 $sql = "insert into tbMember (memberName, memberNickName, memberEmail, memberPw, memberAge, memberSex, memberJob)
+                    values('$memberName','$memberNickName', '$memberEmail','$memberPw', '$memberAge','$memberSex','$memberJob')";
 			 $res = mysqli_query($conn, $sql);
 			 if($res){
 			  echo '회원가입이 완료되었습니다. <br><br><br>';?> 
