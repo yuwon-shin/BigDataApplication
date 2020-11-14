@@ -15,15 +15,10 @@
     else{
 
     if($originPw!=$_SESSION['ses_pw']){
-        echo $originPw;
-        echo "다음";
-        echo $_SESSION['ses_name'];
-        echo $_SESSION['ses_user'];
-        echo $_SESSION['ses_pw'];
-        echo "비밀번호가 틀렸습니다.";
+        echo "<script> alert('비밀번호가 틀렸습니다.'); location.href='editPw.php'; </script>";
     }else{
         if($newPw!=$newPw2){
-            echo "비밀번호가 일치하지 않습니다.";
+            echo "<script> alert('비밀번호가 일치하지 않습니다.'); location.href='editPw.php'; </script>";
         }else{
             $sql = "update tbMember set memberPw='$newPw' where memberIdx = '".$_SESSION['ses_index']."'";
 

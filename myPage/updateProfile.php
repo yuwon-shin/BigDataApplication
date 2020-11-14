@@ -12,7 +12,13 @@
     else{
 
 
-    $sql = "update tbMember set memberName='".$_POST['userName']."', memberNickName='".$_POST['userNickName']."' where memberIdx = '".$_SESSION['ses_index']."'";
+    $sql = "update tbMember 
+            set memberName='".$_POST['userName']."'
+            , memberNickName='".$_POST['userNickName']."' 
+            , memberSex='".$_POST['userSex']."' 
+            ,memberAge='".$_POST['userAge']."' 
+            ,memberJob='".$_POST['userJob']."' 
+            where memberIdx = '".$_SESSION['ses_index']."'";
 
     $res = mysqli_query($conn,$sql);
     if ($res === TRUE) {

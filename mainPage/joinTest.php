@@ -31,7 +31,7 @@
             mysqli_query($conn,$hit)
 //            $user = $_SESSION['ses_user'];
          ?>
-    <head > 
+    <head>
         <title>Join Test <?=$testIdx?></title>
         <style>
             table{
@@ -70,7 +70,7 @@
             margin-top:8px;
             }
             .button3{
-            height: 20px;
+            height: 30px;
             width: 90px;
             font-size: 13px;
             text-align: center;
@@ -103,18 +103,20 @@
          
 
         <h3 align = center>- <?=$content?> -<br></h3>
-        <h4 align="right" style = "padding-right: 8%">[Category] <?=$category?></h4>
+        <h4 align="right" style = "padding-right: 4%">[Category] <?=$category?></h4>
         <form method = "post" action = "./saveAnswer.php">
             <table style = "padding-top:20px" align = center>
                 <thead>
                     <tr>
                         <td height=50 width = "120" align="center" bgcolor=#ccc><font color=white >문항번호</font></td>
-                        <td height=50 width = "700" align = "center" bgcolor=#ccc><font color=white>문항</font></td>
-                        <td height=50 width = "70" align = "center" bgcolor=#ccc><font color=white>1</font></td>
-                        <td height=50 width = "70" align = "center" bgcolor=#ccc><font color=white>2</font></td>
-                        <td height=50 width = "70" align = "center" bgcolor=#ccc><font color=white>3</font></td>
-                        <td height=50 width = "70" align = "center" bgcolor=#ccc><font color=white>4</font></td>
-                        <td height=50  width = "70" align = "center" bgcolor=#ccc><font color=white>5</font></td>
+                        <td height=50 width = "600" align = "center" bgcolor=#ccc><font color=white>문항</font></td>
+                        <td height=50 width = "170" align = "center" bgcolor=#ccc><font color=white></font></td>
+                        <td height=50 width = "50" align = "center" bgcolor=#ccc><font color=white>1</font></td>
+                        <td height=50 width = "50" align = "center" bgcolor=#ccc><font color=white>2</font></td>
+                        <td height=50 width = "50" align = "center" bgcolor=#ccc><font color=white>3</font></td>
+                        <td height=50 width = "50" align = "center" bgcolor=#ccc><font color=white>4</font></td>
+                        <td height=50  width = "50" align = "center" bgcolor=#ccc><font color=white>5</font></td>
+                        <td height=50 width = "170" align = "center" bgcolor=#ccc><font color=white></font></td>
                     </tr>
                 </thead>
 
@@ -127,12 +129,14 @@
                         ?>
                         <tr>
                             <td height=30 width = "120" align = "center"><?php echo $i?></td>
-                            <td height=30 width = "700" align = "center"><?php echo $rows['question'.$i]?></td>
-                            <td height=30 width = "70" align = "center"><input type = "radio" name = "answer<?php echo $i;?>" value = "1" ></td>
-                            <td height=30 width = "70" align = "center"><input type = "radio" name = "answer<?php echo $i;?>" value = "2"></td>
-                            <td height=30 width = "70" align = "center"><input type = "radio" name = "answer<?php echo $i;?>" value = "3"></td>
-                            <td height=30 width = "70" align = "center"><input type = "radio" name = "answer<?php echo $i;?>" value = "4"></td>
-                            <td height=30 width = "70" align = "center"><input type = "radio" name = "answer<?php echo $i;?>" value = "5"></td>
+                            <td height=30 width = "600" align = "center"><?php echo $rows['question'.$i]?></td>
+                            <td height=30 width = "170" align = "center"><?php echo $rows['label'.$i.'_1']?></td>
+                            <td height=30 width = "50" align = "center"><input type = "radio" name = "answer<?php echo $i;?>" value = "1" ></td>
+                            <td height=30 width = "50" align = "center"><input type = "radio" name = "answer<?php echo $i;?>" value = "2"></td>
+                            <td height=30 width = "50" align = "center"><input type = "radio" name = "answer<?php echo $i;?>" value = "3"></td>
+                            <td height=30 width = "50" align = "center"><input type = "radio" name = "answer<?php echo $i;?>" value = "4"></td>
+                            <td height=30 width = "50" align = "center"><input type = "radio" name = "answer<?php echo $i;?>" value = "5"></td>
+                            <td height=30 width = "170" align = "center"><?php echo $rows['label'.$i.'_5']?></td>
                         </tr>
                 <?php
                     $i++;
@@ -157,18 +161,21 @@
         <?php 
             $query5 = "SELECT testIdx, case when tbMember_memberIdx = {$_SESSION['ses_index']} then 1 else 0 end as memberMatch FROM tbTest";
             $res5 = mysqli_query($conn, $query5);
-            $rows5 = mysqli_fetch_assoc($res5);
             ?>
 
+        <!--테스트 목록으로/수정하기/삭제하기 버튼-->
     <div class = "button">
         <?php
         while($rows5 = mysqli_fetch_assoc($res5)){
             if($testIdx==$rows5['testIdx'] && $rows5['memberMatch']){
         ?>
-            <br><button class = "button1" style = "margin-right: 6px" onclick = "location.href = './index.php'">목록으로</button><button class = "button1" style = "margin-right: 6px" onclick = "location.href = './edit.php?testIdx=<?php echo $rows['testIdx']?>'">수정하기</button><button class = "button1"  onclick = "location.href = './delete.php?testIdx=<?php echo $rows['testIdx']?>'">삭제하기</button>
+            <br><button class = "button1" style = "margin-right: 6px" onclick = "location.href = './index.php'">목록으로</button>
+                <button class = "button1" style = "margin-right: 6px" onclick = "location.href = './edit.php?testIdx=<?php echo $rows['testIdx']?>'">수정하기</button>
+                <button class = "button1"  onclick = "location.href = './delete.php?testIdx=<?php echo $rows['testIdx']?>'">삭제하기</button>
         <?php break;}
-        elseif (!($rows5['memberMatch'])){ ?>
+        elseif ($testIdx==$rows5['testIdx'] && !($rows5['memberMatch'])){ ?>
             <br><button class = "button1" onclick = "location.href = './index.php'">목록으로</button>
+
         <?php break;}
         }?>
         </div>
@@ -177,15 +184,17 @@
         <br><br>
 
         <?php
+        //댓글 작성 부분
         if(isset($_SESSION['ses_user'])){ ?>
             <h3 align = left style = "padding-left: 10%"><b>[댓글 작성]</b></h3>
 
             <form action="comment.php?testIdx=<?php echo $testIdx?>" method="post">
             <table align = center width = 1300>
                 <tr>
-                <td align = center width = 500>
-                    <label for = "writeComment"><b><?=$_SESSION['ses_user']?></b>&nbsp;&nbsp;</label>
-                    <input type="text"  style = "height:20px" size=" 140" name="writeComment"></td>
+                <td align = center width = 100>
+                    <b><?=$_SESSION['ses_user']?></b></td>
+                <td><input type="hidden" name="comment" value="insert">
+                    <input type="text"  style = "height:20px" size=" 140" name="inputcomment"></td>
                 <td align = right style = "padding-right: 3%" width = 200><input class = button4 type="submit" name="submit" value="댓글 등록하기"></td>
                 </tr>
             </table>
@@ -199,20 +208,22 @@
         <!--댓글 목록 부분-->
         <div style = "margin-top: 20px"  align = center>
             <?php
-            $query = "select * from tbComment where tbTest_testIdx= '".$testIdx."'";
+            $query = "select * from tbComment where tbTest_testIdx= '".$testIdx."' order by commentIdx";
             $res = mysqli_query($conn, $query);
 
+            //댓글 좋아요 수
             $query0 = "select commentIdx, count(sc.tbComment_commentIdx) as cnt from tbComment as t 
                     left outer join tbComLike as sc on t.commentIdx=sc.tbComment_commentIdx where t.tbTest_testIdx='".$testIdx."'
-                    group by commentIdx;";
+                    group by commentIdx  order by t.commentIdx ;";
             $res0 = mysqli_query($conn, $query0);
 
-            $query1 ="select a.commentIdx, a.tbMember_memberIdx, b.memberNickName from tbComment a INNER JOIN tbMember b ON a.tbMember_memberIdx = b.memberIdx where tbTest_testIdx= '".$testIdx."'";
+            //댓글 작성자 닉네임
+            $query1 ="select a.commentIdx, a.tbMember_memberIdx, b.memberNickName from tbComment a INNER JOIN tbMember b ON a.tbMember_memberIdx = b.memberIdx where tbTest_testIdx= '".$testIdx."' order by commentIdx";
             $res1= mysqli_query($conn, $query1);
 
             //댓글 작성 여부
             $query2 = "select commentIdx, case when tbMember_memberIdx = {$_SESSION['ses_index']} then 1 else 0 end as tbMember_memberIdx
-                    FROM tbComment where tbTest_testIdx= '".$testIdx."'";
+                    FROM tbComment where tbTest_testIdx= '".$testIdx."' order by commentIdx";
             $res2 = mysqli_query($conn, $query2);
 
             //댓글 좋아요 여부
@@ -221,7 +232,7 @@
                     t.commentIdx
                     , case when sc.tbMember_memberIdx = {$_SESSION['ses_index']} then 1 else 0 end as comLikeYN
                     FROM tbComment t
-                    left outer join tbComLike sc on t.commentIdx = sc.tbComment_commentIdx where tbTest_testIdx= '".$testIdx."') a group by commentIdx";
+                    left outer join tbComLike sc on t.commentIdx = sc.tbComment_commentIdx where tbTest_testIdx= '".$testIdx."' order by commentIdx) a group by commentIdx";
             $res3 = mysqli_query($conn, $query3);
             ?>
 

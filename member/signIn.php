@@ -85,7 +85,9 @@
                         $_SESSION['ses_index'] = $row['memberIdx'];
                         $_SESSION['ses_email'] = $row['memberEmail'];
                         $_SESSION['ses_pw'] = $row['memberPw'];
-                        
+                        $_SESSION['ses_sex'] = $row['memberSex'];
+                        $_SESSION['ses_age'] = $row['memberAge'];
+                        $_SESSION['ses_job'] = $row['memberJob'];
                         echo '<br>';
                         echo $_SESSION['ses_user'].'님 안녕하세요.<br><br><br><br>';
                     ?>
