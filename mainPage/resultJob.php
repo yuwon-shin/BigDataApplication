@@ -51,6 +51,17 @@ for($i=0;$i<count($jobs);$i=$i+1){
             line-height: 30px;
         }
 
+        .button1{
+            height: 60px;
+            width: 150px;
+            font-size: 18px;
+            text-align: center;
+            background-color: white;
+            border: 2px solid black;
+            border-radius: 10px
+
+        }
+
 
     </style>
 
@@ -58,6 +69,32 @@ for($i=0;$i<count($jobs);$i=$i+1){
 
 <body>
 <br><h1 align = center>관심 분야 별 결과 분석<br><br></h1>
+
+<form name="member" method="POST" action="resultJob.php?testIdx=<?=$testIdx?>">
+    <div align="center">
+        나<input type="checkbox" name="me" <?php if (isset($_POST['me']) and $_POST['me']='on'){ ?>checked='checked'<?php }else{} ?>>
+        <?php
+        $jobs = array("이공계열","인문계열","사회계열","의약계열","예체능계열","교육계열","직장인");
+        for($i=0;$i<count($jobs);$i=$i+1){
+        echo $jobs[$i]?>
+        <input type=checkbox name="<?php echo $jobs[$i]?>" <?php if (isset($_POST[$jobs[$i]]) and $_POST[$jobs[$i]]='on'){ ?>checked='checked'<?php }else{} ?>>
+        <?php } ?>
+        <br><br>
+        <input class = "button1" type=submit value="결과보기">
+        <br><br>
+    </div>
+</form>
+
+<?php
+for($i=0;$i<count($jobs);$i=$i+1){
+    if(isset($_POST[$jobs[$i]])){$_POST[$jobs[$i]]='on';}
+    else{$_POST[$jobs[$i]]=0;}
+}
+if(isset($_POST['me'])){$_POST['me']='on';}
+else{$_POST['me']=0;}
+
+?>
+
 <table style = "padding-top:20px" align = center>
     <thead>
     <tr>
@@ -86,12 +123,22 @@ for($i=0;$i<count($jobs);$i=$i+1){
             <td height=30 width = "120" align = "center"><?php echo $rows['label'.$i.'_1']?></td>
 
             <!--내 응답 부분-->
-            <td height=30 width = "50" align = "center"><?php echo $_SESSION['answer'.$i]?></td>
+            <?php if($_POST['me']) {?><td height=30 width = "50" align = "center"><?php echo $_SESSION['answer'.$i]?></td><?php }
+            else{}?>
 
             <td colspan=3 width = "50" align = "center"><hr></td>
 
             <!--평균 부분-->
-            <td height=30 width = "50" align = "center"><?php echo $rows1['round(AVG(answer'.$i.'),1)'],$rows2['round(AVG(answer'.$i.'),1)']?></td>
+            <td height=30 width = "50" align = "center">
+                <?php
+                    for($j=0;$j<count($jobs);$j=$j+1){
+                        if($_POST[$jobs[$j]]){echo ${'rows'.$j}['round(AVG(answer'.$i.'),1)'];}
+                        else{}
+                    }
+
+
+                ?>
+            </td>
 
             <td height=30 width = "120" align = "center"><?php echo $rows['label'.$i.'_5']?></td>
         </tr>
@@ -101,5 +148,13 @@ for($i=0;$i<count($jobs);$i=$i+1){
     ?>
     </tbody>
 </table>
+
+<br><br><br>
+<div align="middle">
+
+    <button class = "button1" onclick = "location.href = 'result.php?testIdx=<?=$testIdx?>'">전체 분석</button>
+    <button class = "button1" onclick = "location.href = 'resultSex.php?testIdx=<?=$testIdx?>'">성별 별 분석</button>
+    <button class = "button1" onclick = "location.href = 'resultAge.php?testIdx=<?=$testIdx?>'">연령 별 분석</button>
+</div>
 
 </body>

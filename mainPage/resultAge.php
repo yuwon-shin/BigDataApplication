@@ -6,17 +6,9 @@ $testIdx = $_GET['testIdx'];
 $query = "select * from tbTest where testIdx={$testIdx}";
 $res = mysqli_query($conn, $query);
 $rows=mysqli_fetch_assoc($res);
-
-$query1 = "select round(AVG(answer1),1),round(AVG(answer2),1), round(AVG(answer3),1),round(AVG(answer4),1),round(AVG(answer5),1)
-                ,round(AVG(answer6),1),round(AVG(answer7),1),round(AVG(answer8),1),round(AVG(answer9),1),round(AVG(answer10),1)
-                from tbanswer as a
-                left outer join tbMember as m
-                on a.tbMember_memberIdx = m.memberIdx
-                where a.tbTest_testIdx = {$testIdx} and m.memberAgezzz";
-$res1 = mysqli_query($conn,$query1);
-$rows1 = mysqli_fetch_assoc($res1);
-
 ?>
+
+
 
 
 <!DOCTYPE html>
@@ -55,39 +47,6 @@ $rows1 = mysqli_fetch_assoc($res1);
             border-radius: 10px
 
         }
-        .button2{
-            width: 100px;
-            height: 25px;
-            text-align: center;
-            margin-top:8px;
-        }
-        .button3{
-            height: 30px;
-            width: 90px;
-            font-size: 13px;
-            text-align: center;
-            background-color: white;
-            border: 2px solid black;
-            border-radius: 4px
-
-        }
-        .button4{
-            height: 37px;
-            width: 120px;
-            font-size: 15px;
-            text-align: center;
-            background-color: #ccc;
-            border: 2.5px solid black;
-            border-radius: 10px
-        }
-        .button5{
-            font-size: 13px;
-            text-align: center;
-            background-color: white;
-            border: 2px solid black;
-            border-radius: 4px
-
-        }
     </style>
 
 </head>
@@ -112,6 +71,34 @@ $rows1 = mysqli_fetch_assoc($res1);
     <tbody>
 
     <?php
+    if(isset($_POST['memberAge'])){
+    }else{
+        $_POST['memberAge']=$_SESSION['ses_age'];
+    }
+    ?>
+
+    <form name="memberAge" method="POST" action="resultAge.php?testIdx=<?=$testIdx?>">
+        <div align="center">
+            비교할 연령을 입력해주세요
+            <input type="text" size="30" name="memberAge" value=<?php echo $_POST['memberAge'];?>>
+            <input class = "button1"type=submit value="결과보기">
+        </div>
+    </form>
+
+    <br>
+
+    <?php
+
+    $query1 = "select round(AVG(answer1),1),round(AVG(answer2),1), round(AVG(answer3),1),round(AVG(answer4),1),round(AVG(answer5),1)
+                ,round(AVG(answer6),1),round(AVG(answer7),1),round(AVG(answer8),1),round(AVG(answer9),1),round(AVG(answer10),1)
+                from tbanswer as a
+                left outer join tbMember as m
+                on a.tbMember_memberIdx = m.memberIdx
+                where a.tbTest_testIdx = {$testIdx} and m.memberAge='".$_POST['memberAge']."'";
+    $res1 = mysqli_query($conn, $query1);
+    $rows1 = mysqli_fetch_assoc($res1);
+
+
     $i=1;
 
     while($i < 11){
@@ -137,5 +124,13 @@ $rows1 = mysqli_fetch_assoc($res1);
     ?>
     </tbody>
 </table>
+
+<br><br><br>
+<div align="middle">
+    <button class = "button1" onclick = "location.href = 'result.php?testIdx=<?=$testIdx?>'">전체 분석</button>
+    <button class = "button1" onclick = "location.href = 'resultSex.php?testIdx=<?=$testIdx?>'">성별 별 분석</button>
+    <button class = "button1" onclick = "location.href = 'resultJob.php?testIdx=<?=$testIdx?>'">분야 별 분석</button>
+</div>
+
 
 </body>
