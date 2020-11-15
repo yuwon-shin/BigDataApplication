@@ -88,6 +88,33 @@
 
 <body>
 <br><h1 align = center>성별 별 결과 분석<br><br></h1>
+
+
+
+
+<form name="member" method="POST" action="resultSex.php?testIdx=<?=$testIdx?>">
+    <div align="center">
+        나<input type="checkbox" name="me" <?php if ($_POST['me']): ?>checked='checked'<?php endif; ?>>
+        여자<input type="checkbox" name="girl" <?php if ($_POST['girl']): ?>checked='checked'<?php endif; ?>>
+        남자<input type="checkbox" name="boy" <?php if ($_POST['boy']): ?>checked='checked'<?php endif; ?>>
+        <br><br>
+        <input class = "button1"type=submit value="결과보기">
+        <br><br>
+    </div>
+</form>
+
+<?php
+if(isset($_POST['me'])){$_POST['me']=1;}
+else{$_POST['me']=0;}
+
+if(isset($_POST['boy'])){$_POST['boy']=1;}
+else{$_POST['boy']=0;}
+
+if(isset($_POST['girl'])){$_POST['girl']=1;}
+else{$_POST['girl']=0;}
+?>
+
+
 <table style = "padding-top:20px" align = center>
     <thead>
     <tr>
@@ -121,11 +148,14 @@
 
 
                 <!--여성 평균-->
-                <div class ='circle2' style="margin-left: <?php echo ($rows1['round(AVG(answer'. $i .'),1)']*50)."px" ?>"></div>
+                <?php if($_POST['girl']){?><div class ='circle2' style="margin-left: <?php echo ($rows1['round(AVG(answer'. $i .'),1)']*50)."px" ?>"></div><?php }
+                else{}?>
                 <!--남성 평균-->
-                <div class ='circle0' style="margin-left: <?php echo ($rows2['round(AVG(answer'. $i .'),1)']*50)."px" ?>"></div>
+                <?php if($_POST['boy']){?><div class ='circle0' style="margin-left: <?php echo ($rows2['round(AVG(answer'. $i .'),1)']*50)."px" ?>"></div><?php }
+                else{}?>
                 <!--나-->
-                <div class ='circle1' style="margin-left: <?php echo ($_SESSION['answer'.$i]*50)."px" ?>"></div>
+                <?php if($_POST['me']){?><div class ='circle1' style="margin-left: <?php echo ($_SESSION['answer'.$i]*50)."px" ?>"></div><?php }
+                else{}?>
             </td>
 
             <!--

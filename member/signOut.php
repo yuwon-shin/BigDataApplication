@@ -69,6 +69,9 @@
                         unset($_SESSION['ses_index']);
                         unset($_SESSION['ses_email']);
                         unset($_SESSION['ses_pw']);
+                        unset($_SESSION['ses_sex']);
+                        unset($_SESSION['ses_age']);
+                        unset($_SESSION['ses_job']);
 				        echo "<script> alert('로그아웃 완료'); self.close(); </script>";
 				        
 				    }?> 

@@ -71,22 +71,20 @@
 
 <body>
     <h1 align = center><br><b>Test <?=$testIdx?></b><br><br></h1>
-    
-    <h3 align = right style = "padding-right: 4%"> 작성자:&nbsp;&nbsp;<?=$_SESSION['ses_user']?></h3>
- 
+    <h3 align = right style = "padding-right: 8%"> 작성자:&nbsp;&nbsp;<?=$_SESSION['ses_user']?></h3>
         <table style = "padding-top:20px" align = "center">
             <thead>
                 <tr>
-                <td colspan = 3 height = 60 align = center bgcolor = #373737><font color=white><b>Test <?=$testIdx?></b></font></td></tr>
+                <td colspan = 5 height = 60 align = center bgcolor = #373737><font color=white><b>Test <?=$testIdx?></b></font></td></tr>
             </thead>
 
             <tbody>
                 <tr><td colspan = 3 height = 5></td></tr>                
                 <tr>
                     <td height = 50 width = 200 align = center bgcolor = #efefef><font>테스트 제목</font></td>
-                    <td  height = 50 width = 500 align = right>
+                    <td  height = 50 width = 350 align = right>
                         원하시는 테스트 제목을 기입해주세요:&nbsp;&nbsp;</td>
-                    <td height = 50>
+                    <td height = 50 colspan = 3>
                         <input type="text" name="testTitle" style = "height:25px" size=" 90" value = "<?=$title?>" disabled>
                     </td>
                 </tr>
@@ -94,38 +92,39 @@
 
                 <tr>
                     <td height = 50 width = 200 align = center bgcolor = #efefef><font>테스트 내용</font></td>
-                    <td  height = 50 width = 500 align = right>
+                    <td  height = 50 width = 350 align = right>
                         테스트에 대해 간단하게 설명해주세요:&nbsp;&nbsp;</td>
-                    <td height = 50>
-                        <input type="text" name="testContent" style = "height:25px" size=" 90" value = "<?=$content?>" disabled>
+                    <td height = 50 colspan = 3>
+                        <input type="text" name="testContent" style = "height:25px" size=" 90"  value = "<?=$content?>" disabled>
                     </td>
                 </tr>
 
                 <tr>
                     <td height = 50 width = 200 align = center bgcolor = #efefef><font>테스트 카테고리</font></td>
-                    <td  height = 50 width = 500 align = right>
+                    <td  height = 50 width = 350 align = right>
                         테스트 카테고리를 기입해주세요 (ex-심리):&nbsp;&nbsp;</td>
-                    <td height = 50>
+                    <td height = 50 colspan = 3>
                         <input type="text" name="testCategory" style = "height:25px" size=" 90" value = "<?=$category?>" disabled>
                     </td>
                 </tr>
 
                 <tr><td colspan = 3 height = 2></td></tr> 
                 <tr>
-                    <td colspan = 3 height = 30 align = center bgcolor = #ccc><b>&nbsp;&nbsp;모든 문항은 오지선다로 답변되는 형태여야합니다.</b></td>
-                </tr>
+                    <td colspan = 5 height = 30 align = center bgcolor = #ccc><b>&nbsp;&nbsp;모든 문항은 오지선다로 답변되는 형태여야합니다.</b></td>
                 <tr>
-                    <td rowspan="2"  width = 200 align = center bgcolor = #efefef><font>문항 1</font></td>
-                    <td  height = 50 width = 500 align = right>
-                        1번 문항의 질문을 기입해주세요:&nbsp;&nbsp;</td>
-                    <td height = 50>
+                <tr>
+                    <td rowspan="2" width = 200 align = center bgcolor = #efefef><font>문항 1</font></td>
+                    <td  height = 50 width = 350 align = right >
+                        1번 문항의 질문을 기입해주세요:&nbsp;&nbsp;
+                    </td>
+                    <td height = 50 colspan = 3>
                         <input type="text" name="question1" style = "height:25px" size=" 90" value = "<?=$question1?>" disabled>
                     </td>
                 </tr>
-
                 <tr>
-                    <td>라벨을 입력해주세요</td>
-                    <td width='10%'>1점 라벨<input type="text" align = center name="label1_1" style = "height:25px" value = "<?=$label1_1?>" disabled></td>
+                    <td  height = 50 width = 350 align = right>
+                        라벨을 입력해 주세요&nbsp;&nbsp;</td>
+                    <td width='20%'>1점 라벨&nbsp;&nbsp;<input type="text" align = center name="label1_1" style = "height:25px" value = "<?=$label1_1?>" disabled></td>
                     <td>
                         <input type = "radio" value = "1" disabled>
                         <input type = "radio" value = "2" disabled>
@@ -133,20 +132,21 @@
                         <input type = "radio" value = "4" disabled>
                         <input type = "radio" value = "5" disabled>
                     </td>
-                    <td width='10%'><input type="text" align = center name="label1_5" style = "height:25px" value = "<?=$label1_5?>" disabled>5점 라벨</td>
+                    <td width='20%'><input type="text" align = center name="label1_5" style = "height:25px" value = "<?=$label1_5?>" disabled>&nbsp;&nbsp;5점 라벨</td>
                 </tr>
 
                 <tr>
                     <td rowspan="2" width = 200 align = center bgcolor = #efefef><font>문항 2</font></td>
-                    <td  height = 50 width = 500 align = right>
+                    <td  height = 50 width = 350 align = right>
                         2번 문항의 질문을 기입해주세요:&nbsp;&nbsp;</td>
                     <td height = 50 colspan = 3>
                         <input type="text" name="question2" style = "height:25px" size=" 90" value = "<?=$question2?>" disabled>
                     </td>
                 </tr>
                 <tr>
-                    <td>라벨을 입력해주세요</td>
-                    <td width='10%'>1점 라벨<input type="text" align = center name="label2_1" style = "height:25px" value = "<?=$label2_1?>" disabled></td>
+                    <td  height = 50 width = 350 align = right>
+                        라벨을 입력해 주세요&nbsp;&nbsp;</td>
+                    <td width='20%'>1점 라벨&nbsp;&nbsp;<input type="text" align = center name="label2_1" style = "height:25px" value = "<?=$label2_1?>" disabled></td>
                     <td>
                         <input type = "radio" value = "1" disabled>
                         <input type = "radio" value = "2" disabled>
@@ -154,20 +154,21 @@
                         <input type = "radio" value = "4" disabled>
                         <input type = "radio" value = "5" disabled>
                     </td>
-                    <td width='10%'><input type="text" align = center name="label2_5" style = "height:25px" value = "<?=$label2_5?>" disabled>5점 라벨</td>
+                    <td width='20%'><input type="text" align = center name="label2_5" style = "height:25px" value = "<?=$label2_5?>" disabled>&nbsp;&nbsp;5점 라벨</td>
                 </tr>
 
                 <tr>
                     <td rowspan="2" width = 200 align = center bgcolor = #efefef><font>문항 3</font></td>
-                    <td  height = 50 width = 500 align = right>
+                    <td  height = 50 width = 350 align = right>
                         3번 문항의 질문을 기입해주세요:&nbsp;&nbsp;</td>
                     <td height = 50 colspan = 3>
                         <input type="text" name="question3" style = "height:25px" size=" 90" value = "<?=$question3?>" disabled>
                     </td>
                 </tr>
                 <tr>
-                    <td>라벨을 입력해주세요</td>
-                    <td width='10%'>1점 라벨<input type="text" align = center name="label3_1" style = "height:25px" value = "<?=$label3_1?>" disabled></td>
+                    <td  height = 50 width = 350 align = right>
+                        라벨을 입력해 주세요&nbsp;&nbsp;</td>
+                    <td width='20%'>1점 라벨&nbsp;&nbsp;<input type="text" align = center name="label3_1" style = "height:25px" value = "<?=$label3_1?>" disabled></td>
                     <td>
                         <input type = "radio" value = "1" disabled>
                         <input type = "radio" value = "2" disabled>
@@ -175,20 +176,21 @@
                         <input type = "radio" value = "4" disabled>
                         <input type = "radio" value = "5" disabled>
                     </td>
-                    <td width='10%'><input type="text" align = center name="label3_5" style = "height:25px" value = "<?=$label3_5?>" disabled>5점 라벨</td>
+                    <td width='20%'><input type="text" align = center name="label3_5" style = "height:25px" value = "<?=$label3_5?>" disabled>&nbsp;&nbsp;5점 라벨</td>
                 </tr>
 
                 <tr>
                     <td rowspan="2" width = 200 align = center bgcolor = #efefef><font>문항 4</font></td>
-                    <td  height = 50 width = 500 align = right>
+                    <td  height = 50 width = 350 align = right>
                         4번 문항의 질문을 기입해주세요:&nbsp;&nbsp;</td>
                     <td height = 50 colspan = 3>
                         <input type="text" name="question4" style = "height:25px" size=" 90" value = "<?=$question4?>" disabled>
                     </td>
                 </tr>
                 <tr>
-                    <td>라벨을 입력해주세요</td>
-                    <td width='10%'>1점 라벨<input type="text" align = center name="label4_1" style = "height:25px" value = "<?=$label4_1?>" disabled></td>
+                    <td  height = 50 width = 350 align = right>
+                        라벨을 입력해 주세요&nbsp;&nbsp;</td>
+                    <td width='20%'>1점 라벨&nbsp;&nbsp;<input type="text" align = center name="label4_1" style = "height:25px" value = "<?=$label4_1?>" disabled></td>
                     <td>
                         <input type = "radio" value = "1" disabled>
                         <input type = "radio" value = "2" disabled>
@@ -196,20 +198,21 @@
                         <input type = "radio" value = "4" disabled>
                         <input type = "radio" value = "5" disabled>
                     </td>
-                    <td width='10%'><input type="text" align = center name="label4_5" style = "height:25px" value = "<?=$label4_5?>" disabled>5점 라벨</td>
+                    <td width='20%'><input type="text" align = center name="label4_5" style = "height:25px" value = "<?=$label4_5?>" disabled>&nbsp;&nbsp;5점 라벨</td>
                 </tr>
 
                 <tr>
                     <td rowspan="2" width = 200 align = center bgcolor = #efefef><font>문항 5</font></td>
-                    <td  height = 50 width = 500 align = right>
+                    <td  height = 50 width = 350 align = right>
                         5번 문항의 질문을 기입해주세요:&nbsp;&nbsp;</td>
                     <td height = 50 colspan = 3>
                         <input type="text" name="question5" style = "height:25px" size=" 90" value = "<?=$question5?>" disabled>
                     </td>
                 </tr>
                 <tr>
-                    <td>라벨을 입력해주세요</td>
-                    <td width='10%'>1점 라벨<input type="text" align = center name="label5_1" style = "height:25px" value = "<?=$label5_1?>" disabled></td>
+                    <td  height = 50 width = 350 align = right>
+                        라벨을 입력해 주세요&nbsp;&nbsp;</td>
+                    <td width='20%'>1점 라벨&nbsp;&nbsp;<input type="text" align = center name="label5_1" style = "height:25px" value = "<?=$label5_1?>" disabled></td>
                     <td>
                         <input type = "radio" value = "1" disabled>
                         <input type = "radio" value = "2" disabled>
@@ -217,20 +220,21 @@
                         <input type = "radio" value = "4" disabled>
                         <input type = "radio" value = "5" disabled>
                     </td>
-                    <td width='10%'><input type="text" align = center name="label5_5" style = "height:25px" value = "<?=$label5_5?>" disabled>5점 라벨</td>
+                    <td width='20%'><input type="text" align = center name="label5_5" style = "height:25px" value = "<?=$label5_5?>" disabled>&nbsp;&nbsp;5점 라벨</td>
                 </tr>
 
                 <tr>
                     <td rowspan="2" width = 200 align = center bgcolor = #efefef><font>문항 6</font></td>
-                    <td  height = 50 width = 500 align = right>
+                    <td  height = 50 width = 350 align = right>
                         6번 문항의 질문을 기입해주세요:&nbsp;&nbsp;</td>
                     <td height = 50 colspan = 3>
                         <input type="text" name="question6" style = "height:25px" size=" 90" value = "<?=$question6?>" disabled>
                     </td>
                 </tr>
                 <tr>
-                    <td>라벨을 입력해주세요</td>
-                    <td width='10%'>1점 라벨<input type="text" align = center name="label6_1" style = "height:25px" value = "<?=$label6_1?>" disabled></td>
+                    <td  height = 50 width = 350 align = right>
+                        라벨을 입력해 주세요&nbsp;&nbsp;</td>
+                    <td width='20%'>1점 라벨&nbsp;&nbsp;<input type="text" align = center name="label6_1" style = "height:25px" value = "<?=$label6_1?>" disabled></td>
                     <td>
                         <input type = "radio" value = "1" disabled>
                         <input type = "radio" value = "2" disabled>
@@ -238,20 +242,21 @@
                         <input type = "radio" value = "4" disabled>
                         <input type = "radio" value = "5" disabled>
                     </td>
-                    <td width='10%'><input type="text" align = center name="label6_5" style = "height:25px" value = "<?=$label6_5?>" disabled>5점 라벨</td>
+                    <td width='20%'><input type="text" align = center name="label6_5" style = "height:25px" value = "<?=$label6_5?>" disabled>&nbsp;&nbsp;5점 라벨</td>
                 </tr>
 
                 <tr>
                     <td rowspan="2" width = 200 align = center bgcolor = #efefef><font>문항 7</font></td>
-                    <td  height = 50 width = 500 align = right>
+                    <td  height = 50 width = 350 align = right>
                         7번 문항의 질문을 기입해주세요:&nbsp;&nbsp;</td>
                     <td height = 50 colspan = 3>
                         <input type="text" name="question7" style = "height:25px" size=" 90" value = "<?=$question7?>" disabled>
                     </td>
                 </tr>
                 <tr>
-                    <td>라벨을 입력해주세요</td>
-                    <td width='10%'>1점 라벨<input type="text" align = center name="label7_1" style = "height:25px" value = "<?=$label7_1?>" disabled></td>
+                    <td  height = 50 width = 350 align = right>
+                        라벨을 입력해 주세요&nbsp;&nbsp;</td>
+                    <td width='20%'>1점 라벨&nbsp;&nbsp;<input type="text" align = center name="label7_1" style = "height:25px" value = "<?=$label7_1?>" disabled></td>
                     <td>
                         <input type = "radio" value = "1" disabled>
                         <input type = "radio" value = "2" disabled>
@@ -259,20 +264,21 @@
                         <input type = "radio" value = "4" disabled>
                         <input type = "radio" value = "5" disabled>
                     </td>
-                    <td width='10%'><input type="text" align = center name="label7_5" style = "height:25px" value = "<?=$label7_5?>" disabled>5점 라벨</td>
+                    <td width='20%'><input type="text" align = center name="label7_5" style = "height:25px" value = "<?=$label7_5?>" disabled>&nbsp;&nbsp;5점 라벨</td>
                 </tr>
 
                 <tr>
                     <td rowspan="2" width = 200 align = center bgcolor = #efefef><font>문항 8</font></td>
-                    <td  height = 50 width = 500 align = right>
+                    <td  height = 50 width = 350 align = right>
                         8번 문항의 질문을 기입해주세요:&nbsp;&nbsp;</td>
                     <td height = 50 colspan = 3>
                         <input type="text" name="question8" style = "height:25px" size=" 90" value = "<?=$question8?>" disabled>
                     </td>
                 </tr>
                 <tr>
-                    <td>라벨을 입력해주세요</td>
-                    <td width='10%'>1점 라벨<input type="text" align = center name="label8_1" style = "height:25px" value = "<?=$label8_1?>" disabled></td>
+                    <td  height = 50 width = 350 align = right>
+                        라벨을 입력해 주세요&nbsp;&nbsp;</td>
+                    <td width='20%'>1점 라벨&nbsp;&nbsp;<input type="text" align = center name="label8_1" style = "height:25px" value = "<?=$label8_1?>" disabled></td>
                     <td>
                         <input type = "radio" value = "1" disabled>
                         <input type = "radio" value = "2" disabled>
@@ -280,20 +286,21 @@
                         <input type = "radio" value = "4" disabled>
                         <input type = "radio" value = "5" disabled>
                     </td>
-                    <td width='10%'><input type="text" align = center name="label8_5" style = "height:25px" value = "<?=$label8_5?>" disabled>5점 라벨</td>
+                    <td width='20%'><input type="text" align = center name="label8_5" style = "height:25px" value = "<?=$label8_5?>" disabled>&nbsp;&nbsp;5점 라벨</td>
                 </tr>
 
                 <tr>
                     <td rowspan="2" width = 200 align = center bgcolor = #efefef><font>문항 9</font></td>
-                    <td  height = 50 width = 500 align = right>
+                    <td  height = 50 width = 350 align = right>
                         9번 문항의 질문을 기입해주세요:&nbsp;&nbsp;</td>
                     <td height = 50 colspan = 3>
                         <input type="text" name="question9" style = "height:25px" size=" 90" value = "<?=$question9?>" disabled>
                     </td>
                 </tr>
                 <tr>
-                    <td>라벨을 입력해주세요</td>
-                    <td width='10%'>1점 라벨<input type="text" align = center name="label9_1" style = "height:25px" value = "<?=$label9_1?>" disabled></td>
+                    <td  height = 50 width = 350 align = right>
+                        라벨을 입력해 주세요&nbsp;&nbsp;</td>
+                    <td width='20%'>1점 라벨&nbsp;&nbsp;<input type="text" align = center name="label9_1" style = "height:25px" value = "<?=$label9_1?>" disabled></td>
                     <td>
                         <input type = "radio" value = "1" disabled>
                         <input type = "radio" value = "2" disabled>
@@ -301,20 +308,21 @@
                         <input type = "radio" value = "4" disabled>
                         <input type = "radio" value = "5" disabled>
                     </td>
-                    <td width='10%'><input type="text" align = center name="label9_5" style = "height:25px" value = "<?=$label9_5?>" disabled>5점 라벨</td>
+                    <td width='20%'><input type="text" align = center name="label9_5" style = "height:25px" value = "<?=$label9_5?>" disabled>&nbsp;&nbsp;5점 라벨</td>
                 </tr>
 
                 <tr>
                     <td rowspan="2" width = 200 align = center bgcolor = #efefef><font>문항 10</font></td>
-                    <td  height = 50 width = 500 align = right>
+                    <td  height = 50 width = 350 align = right>
                         10번 문항의 질문을 기입해주세요:&nbsp;&nbsp;</td>
                     <td height = 50 colspan = 3>
-                        <input type="text" name="question10" style = "height:25px" size=" 90" value = "<?=$question10?>" disabled>
+                        <input type="text" name="question10" style = "height:25px" size=" 90"  value = "<?=$question10?>" disabled>
                     </td>
                 </tr>
                 <tr>
-                    <td>라벨을 입력해주세요</td>
-                    <td width='10%'>1점 라벨<input type="text" align = center name="label10_1" style = "height:25px" value = "<?=$label10_1?>" disabled></td>
+                    <td  height = 50 width = 350 align = right>
+                        라벨을 입력해 주세요&nbsp;&nbsp;</td>
+                    <td width='20%'>1점 라벨&nbsp;&nbsp;<input type="text" align = center name="label10_1" style = "height:25px" value = "<?=$label10_1?>" disabled></td>
                     <td>
                         <input type = "radio" value = "1" disabled>
                         <input type = "radio" value = "2" disabled>
@@ -322,14 +330,14 @@
                         <input type = "radio" value = "4" disabled>
                         <input type = "radio" value = "5" disabled>
                     </td>
-                    <td width='10%'><input type="text" align = center name="label10_5" style = "height:25px" value = "<?=$label10_5?>" disabled>5점 라벨</td>
+                    <td width='20%'><input type="text" align = center name="label10_5" style = "height:25px" value = "<?=$label10_5?>" disabled>&nbsp;&nbsp;5점 라벨</td>
                 </tr>
 
 
             </tbody>
         </table>
 
-        <div class = buttonbox>
+         <div class = buttonbox>
         <?php
         if($_GET['type'] == 1){  
         ?>
@@ -345,8 +353,9 @@
             
         </div>
        <br><br>
-
-      
-
+       <?php
+        mysqli_free_result($res);
+        mysqli_close($conn)
+        ?>
 </body>
 </html>

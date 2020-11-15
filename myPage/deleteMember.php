@@ -27,7 +27,9 @@
     unset($_SESSION['ses_index']);
     unset($_SESSION['ses_email']);
     unset($_SESSION['ses_pw']);
-
+    unset($_SESSION['ses_sex']);
+    unset($_SESSION['ses_age']);
+    unset($_SESSION['ses_job']);
     mysqli_close($conn);
     }
 ?>

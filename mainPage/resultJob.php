@@ -58,6 +58,31 @@ for($i=0;$i<count($jobs);$i=$i+1){
 
 <body>
 <br><h1 align = center>관심 분야 별 결과 분석<br><br></h1>
+
+<form name="member" method="POST" action="resultJob.php?testIdx=<?=$testIdx?>">
+    <div align="center">
+        나<input type="checkbox" name="me">
+        <?php
+        $jobs = array("이공계열","인문계열","사회계열","의약계열","예체능계열","교육계열","직장인");
+        for($i=0;$i<count($jobs);$i=$i+1){
+        echo $jobs[$i]."<input type=checkbox name={$jobs[$i]} >" ;
+        }
+        ?>
+        <br><br>
+        <input class = "button1" type=submit value="결과보기">
+        <br><br>
+    </div>
+</form>
+
+<?php
+for($i=0;$i<count($jobs);$i=$i+1){
+    if(isset($_POST[$jobs[$i]])){$_POST[$jobs[$i]]=1;}
+    else{$_POST[$jobs[$i]]=0;}
+    echo $_POST[$jobs[$i]];
+}
+
+?>
+
 <table style = "padding-top:20px" align = center>
     <thead>
     <tr>
@@ -91,7 +116,16 @@ for($i=0;$i<count($jobs);$i=$i+1){
             <td colspan=3 width = "50" align = "center"><hr></td>
 
             <!--평균 부분-->
-            <td height=30 width = "50" align = "center"><?php echo $rows1['round(AVG(answer'.$i.'),1)'],$rows2['round(AVG(answer'.$i.'),1)']?></td>
+            <td height=30 width = "50" align = "center">
+                <?php
+                    for($j=0;$j<count($jobs);$j=$j+1){
+                        if($_POST[$jobs[$j]]){echo ${'rows'.$j}['round(AVG(answer'.$i.'),1)'];}
+                        else{}
+                    }
+
+
+                ?>
+            </td>
 
             <td height=30 width = "120" align = "center"><?php echo $rows['label'.$i.'_5']?></td>
         </tr>

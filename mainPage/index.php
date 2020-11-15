@@ -76,6 +76,17 @@ include '../include/session.php';
             border-radius: 4px
 
         }
+        .button3{
+            height: 32px;
+            width: 120px;
+            font-size: 13px;
+            text-align: center;
+            margin-bottom: 5px;
+            background-color: white;
+            border: 2px solid black;
+            border-radius: 4px
+
+        }
         .text {
             font-size: 15px;
             padding-top:20px;
@@ -106,6 +117,31 @@ include '../include/session.php';
         }
         .heart::after {
             top: -50%;
+        }
+        .wrap {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding-top: 40px;
+            align-self: auto;
+        }
+        .container {
+            width: 1200px;
+            text-align: center;
+            background-color: #f1f3f5;
+            border: 4px solid #adb5bd;
+            border-radius: 10px;
+            padding: 30px;
+        }
+        .container1 {
+            width: 1000px;
+            text-align: center;
+            background-color: white;
+            border: 4px solid #868e96;
+            border-radius: 10px;
+            padding: 30px;
+            margin-left:70px;
         }
 
         a:link {color : black; text-decoration:none;}
@@ -258,20 +294,193 @@ if(isset($_SESSION['ses_index'])){
     </tbody>
 </table>
 
-<?php
-mysqli_free_result($res);
-mysqli_free_result($res2);
-mysqli_close($conn)
-?>
-
 <div class = text>
     <?php
     if(isset($_SESSION['ses_user'])){
         ?>
         <font style = "cursor: pointer" onclick = "location.href= 'test.php'">테스트 만들기</font>
-        <?php
-    }?>
+
 </div>
 
+<?php
+$query4 = "SELECT t.testIdx as testIdx, `testTitle`, `testCategory`, `hit`, r.scrapNm as scrap from tbTest  as t inner join(select sc.tbTest_testIdx as idx, count(sc.testScrapIdx) as scrapNm from (select tbTest_testIdx from tbTestScrap s left outer join tbMember m on s.tbMember_memberIdx = memberIdx 
+    where m.memberIdx= {$_SESSION['ses_index']}) as mytest left outer join tbTestScrap sc 
+    on mytest.tbTest_testIdx = sc.tbTest_testIdx where sc.tbMember_memberIdx!={$_SESSION['ses_index']} group by sc.tbTest_testIdx) r on t.testIdx = r.idx order by scrap limit 3";
+$res5 = mysqli_query($conn, $query4);
+
+
+$query5 = "SELECT t.testIdx as testIdx, `testTitle`, `testCategory`, `hit`, r.scrapNm as scrap from tbTest  as t inner join(select s.tbTest_testIdx as idx ,count(testScrapIdx) as scrapNm from tbTestScrap s left outer join tbMember m on s.tbMember_memberIdx = memberIdx where m.memberSex= '{$_SESSION['ses_sex']}'
+    group by s.tbTest_testIdx) r on t.testIdx = r.idx order by scrap desc limit 3";
+$res6 = mysqli_query($conn, $query5);
+
+$query6 = "SELECT t.testIdx as testIdx, `testTitle`, `testCategory`, `hit`, r.scrapNm as scrap from tbTest  as t inner join(select s.tbTest_testIdx as idx ,count(testScrapIdx) as scrapNm from tbTestScrap s left outer join tbMember m on s.tbMember_memberIdx = memberIdx where m.memberAge= '{$_SESSION['ses_age']}'
+    group by s.tbTest_testIdx) r on t.testIdx = r.idx order by scrap desc limit 3";
+$res7 = mysqli_query($conn, $query6);
+
+$query7 = "SELECT t.testIdx as testIdx, `testTitle`, `testCategory`, `hit`, r.scrapNm as scrap from tbTest  as t inner join(select s.tbTest_testIdx as idx ,count(testScrapIdx) as scrapNm from tbTestScrap s left outer join tbMember m on s.tbMember_memberIdx = memberIdx where m.memberJob= '{$_SESSION['ses_job']}'
+    group by s.tbTest_testIdx ) r on t.testIdx = r.idx order by scrap desc limit 3";
+$res8 = mysqli_query($conn, $query7);
+?>
+
+
+
+<div class = wrap>
+    <div class = container>
+
+    <h2><font color = #495057><b>&nbsp;&nbsp;[개인 맞춤형 테스트 추천]</b></font></h2><br>
+    <h3 align = left><font color = #868e96><b>&nbsp;&nbsp;&nbsp;&nbsp;다른 사람들은 내가 찜한 테스트 중, 어떤 테스트를 찜했을까?</b></font></h3>
+    <div class = container1 >
+        <table  algin = center>
+            <thead>
+                <tr style = "border-bottom: 2px solid #444444">
+                    <td width = "100" align="center" style = "background: #efefef"><b>Ranking</b></td>
+                    <td width = "80" align = "center">번호</td>
+                    <td width = "250" align = "center">제목</td>
+                    <td width = "100" align = "center">카테고리</td>
+                    <td width = "100" align = "center">조회수</td>
+                    <td width = "100" align = "center">테스트찜</td>
+                    <td width = "150" align = "center">찜</td>
+                </tr>
+            </thead>
+
+            <tbody>
+            <?php
+                $i = 0;
+                while($rows5 = mysqli_fetch_assoc($res5)){
+                    $i++; 
+
+            ?>  <tr>
+                    <td width = "100" align = "center" style = "background: #efefef"><b>Top <?=$i?></b></td>
+                    <td width = "80" align = "center"><?php echo $rows5['testIdx']?></td>
+                    <td width = "250" align = "center"><?php echo $rows5['testTitle']?></td>
+                    <td width = "100" align = "center"><?php echo $rows5['testCategory']?></td>
+                    <td width = "100" align = "center"><?php echo $rows5['hit']?></td>
+                    <td width = "100" align = "center"><?php echo $rows5['scrap']?></td>
+                    <td width = "150" align = "center"><input class = "button3" type = "button"  name="joinTest"  value = "테스트 참여하기" onclick = "location.href= 'joinTest.php?testIdx=<?php echo $rows5['testIdx']?>'"></td>
+                </tr>
+            <?php    }
+            ?>
+            </tbody>
+        </table>
+    </div><br>
+
+        <h3 align = left><font color = #868e96><b>&nbsp;&nbsp;&nbsp;&nbsp;<?php echo $_SESSION['ses_sex']?> 회원은 어떤 테스트를 많이 찜했을까?</b></font></h3>
+    <div class = container1 >
+        <table  algin = center>
+            <thead>
+                <tr style = "border-bottom: 2px solid #444444">
+                    <td width = "100" align="center" style = "background: #efefef"><b>Ranking</b></td>
+                    <td width = "80" align = "center">번호</td>
+                    <td width = "250" align = "center">제목</td>
+                    <td width = "100" align = "center">카테고리</td>
+                    <td width = "100" align = "center">조회수</td>
+                    <td width = "100" align = "center">테스트찜</td>
+                    <td width = "150" align = "center">찜</td>
+                </tr>
+            </thead>
+
+            <tbody>
+            <?php
+                $i = 0;
+                while($rows6 = mysqli_fetch_assoc($res6)){
+                    $i++; 
+
+            ?>  <tr>
+                    <td width = "100" align = "center" style = "background: #efefef"><b>Top <?=$i?></b></td>
+                    <td width = "80" align = "center"><?php echo $rows6['testIdx']?></td>
+                    <td width = "250" align = "center"><?php echo $rows6['testTitle']?></td>
+                    <td width = "100" align = "center"><?php echo $rows6['testCategory']?></td>
+                    <td width = "100" align = "center"><?php echo $rows6['hit']?></td>
+                    <td width = "100" align = "center"><?php echo $rows6['scrap']?></td>
+                    <td width = "150" align = "center"><input class = "button3" type = "button"  name="joinTest"  value = "테스트 참여하기" onclick = "location.href= 'joinTest.php?testIdx=<?php echo $rows6['testIdx']?>'"></td>
+                </tr>
+            <?php    }
+            ?>
+            </tbody>
+        </table>
+    </div><br>
+
+    <h3 align = left><font color = #868e96><b>&nbsp;&nbsp;&nbsp;&nbsp;<?php echo $_SESSION['ses_age']?>세 회원은 어떤 테스트를 많이 찜했을까?</b></font></h3>
+    <div class = container1 >
+        <table  algin = center>
+            <thead>
+                <tr style = "border-bottom: 2px solid #444444">
+                    <td width = "100" align="center" style = "background: #efefef"><b>Ranking</b></td>
+                    <td width = "80" align = "center">번호</td>
+                    <td width = "250" align = "center">제목</td>
+                    <td width = "100" align = "center">카테고리</td>
+                    <td width = "100" align = "center">조회수</td>
+                    <td width = "100" align = "center">테스트찜</td>
+                    <td width = "150" align = "center">찜</td>
+                </tr>
+            </thead>
+
+            <tbody>
+            <?php
+                $i = 0;
+                while($rows7 = mysqli_fetch_assoc($res7)){
+                    $i++; 
+
+            ?>  <tr>
+                    <td width = "100" align = "center" style = "background: #efefef"><b>Top <?=$i?></b></td>
+                    <td width = "80" align = "center"><?php echo $rows7['testIdx']?></td>
+                    <td width = "250" align = "center"><?php echo $rows7['testTitle']?></td>
+                    <td width = "100" align = "center"><?php echo $rows7['testCategory']?></td>
+                    <td width = "100" align = "center"><?php echo $rows7['hit']?></td>
+                    <td width = "100" align = "center"><?php echo $rows7['scrap']?></td>
+                    <td width = "150" align = "center"><input class = "button3" type = "button"  name="joinTest"  value = "테스트 참여하기" onclick = "location.href= 'joinTest.php?testIdx=<?php echo $rows7['testIdx']?>'"></td>
+                </tr>
+            <?php    }
+            ?>
+            </tbody>
+        </table>
+    </div><br>
+
+    <h3 align = left><font color = #868e96><b>&nbsp;&nbsp;&nbsp;&nbsp;<?php echo $_SESSION['ses_job']?> 회원은 어떤 테스트를 많이 찜했을까?</b></font></h3>
+    <div class = container1 >
+        <table  algin = center>
+            <thead>
+                <tr style = "border-bottom: 2px solid #444444">
+                    <td width = "100" align="center" style = "background: #efefef"><b>Ranking</b></td>
+                    <td width = "80" align = "center">번호</td>
+                    <td width = "250" align = "center">제목</td>
+                    <td width = "100" align = "center">카테고리</td>
+                    <td width = "100" align = "center">조회수</td>
+                    <td width = "100" align = "center">테스트찜</td>
+                    <td width = "150" align = "center">찜</td>
+                </tr>
+            </thead>
+
+            <tbody>
+            <?php
+                $i = 0;
+                while($rows8 = mysqli_fetch_assoc($res8)){
+                    $i++; 
+
+            ?>  <tr>
+                    <td width = "100" align = "center" style = "background: #efefef"><b>Top <?=$i?></b></td>
+                    <td width = "80" align = "center"><?php echo $rows8['testIdx']?></td>
+                    <td width = "250" align = "center"><?php echo $rows8['testTitle']?></td>
+                    <td width = "100" align = "center"><?php echo $rows8['testCategory']?></td>
+                    <td width = "100" align = "center"><?php echo $rows8['hit']?></td>
+                    <td width = "100" align = "center"><?php echo $rows8['scrap']?></td>
+                    <td width = "150" align = "center"><input class = "button3" type = "button"  name="joinTest"  value = "테스트 참여하기" onclick = "location.href= 'joinTest.php?testIdx=<?php echo $rows8['testIdx']?>'"></td>
+                </tr>
+            <?php    }
+            ?>
+            </tbody>
+        </table>
+    </div><br>
+
+    </div>
+</div><br><br>
+    <?php 
+    } ?>
+
+<?php
+mysqli_free_result($res);
+mysqli_free_result($res2);
+mysqli_close($conn)
+?>
 </body>
 </html>

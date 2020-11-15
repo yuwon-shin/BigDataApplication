@@ -23,7 +23,10 @@
             , '".$_SESSION['answer6']."', '".$_SESSION['answer7']."', '".$_SESSION['answer8']."', '".$_SESSION['answer9']."', '".$_SESSION['answer10']."', '$testIdx', '$memberIdx')";
 	$result = mysqli_query($conn,$query);
 
-	if($result){ ?>
+	if($result){
+
+?>
+
 
 		<script>
 			alert("<?php echo "답변이 등록되었습니다."?>");

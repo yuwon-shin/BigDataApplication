@@ -103,20 +103,20 @@
          
 
         <h3 align = center>- <?=$content?> -<br></h3>
-        <h4 align="right" style = "padding-right: 8%">[Category] <?=$category?></h4>
+        <h4 align="right" style = "padding-right: 4%">[Category] <?=$category?></h4>
         <form method = "post" action = "./saveAnswer.php">
             <table style = "padding-top:20px" align = center>
                 <thead>
                     <tr>
                         <td height=50 width = "120" align="center" bgcolor=#ccc><font color=white >문항번호</font></td>
-                        <td height=50 width = "700" align = "center" bgcolor=#ccc><font color=white>문항</font></td>
-                        <td height=50 width = "120" align = "center" bgcolor=#ccc><font color=white></font></td>
+                        <td height=50 width = "600" align = "center" bgcolor=#ccc><font color=white>문항</font></td>
+                        <td height=50 width = "170" align = "center" bgcolor=#ccc><font color=white></font></td>
                         <td height=50 width = "50" align = "center" bgcolor=#ccc><font color=white>1</font></td>
                         <td height=50 width = "50" align = "center" bgcolor=#ccc><font color=white>2</font></td>
                         <td height=50 width = "50" align = "center" bgcolor=#ccc><font color=white>3</font></td>
                         <td height=50 width = "50" align = "center" bgcolor=#ccc><font color=white>4</font></td>
                         <td height=50  width = "50" align = "center" bgcolor=#ccc><font color=white>5</font></td>
-                        <td height=50 width = "120" align = "center" bgcolor=#ccc><font color=white></font></td>
+                        <td height=50 width = "170" align = "center" bgcolor=#ccc><font color=white></font></td>
                     </tr>
                 </thead>
 
@@ -129,14 +129,14 @@
                         ?>
                         <tr>
                             <td height=30 width = "120" align = "center"><?php echo $i?></td>
-                            <td height=30 width = "700" align = "center"><?php echo $rows['question'.$i]?></td>
-                            <td height=30 width = "120" align = "center"><?php echo $rows['label'.$i.'_1']?></td>
+                            <td height=30 width = "600" align = "center"><?php echo $rows['question'.$i]?></td>
+                            <td height=30 width = "170" align = "center"><?php echo $rows['label'.$i.'_1']?></td>
                             <td height=30 width = "50" align = "center"><input type = "radio" name = "answer<?php echo $i;?>" value = "1" ></td>
                             <td height=30 width = "50" align = "center"><input type = "radio" name = "answer<?php echo $i;?>" value = "2"></td>
                             <td height=30 width = "50" align = "center"><input type = "radio" name = "answer<?php echo $i;?>" value = "3"></td>
                             <td height=30 width = "50" align = "center"><input type = "radio" name = "answer<?php echo $i;?>" value = "4"></td>
                             <td height=30 width = "50" align = "center"><input type = "radio" name = "answer<?php echo $i;?>" value = "5"></td>
-                            <td height=30 width = "120" align = "center"><?php echo $rows['label'.$i.'_5']?></td>
+                            <td height=30 width = "170" align = "center"><?php echo $rows['label'.$i.'_5']?></td>
                         </tr>
                 <?php
                     $i++;
@@ -191,9 +191,9 @@
             <form action="comment.php?testIdx=<?php echo $testIdx?>" method="post">
             <table align = center width = 1300>
                 <tr>
-                <td align = center width = 500>
-                    <input type="hidden" name="comment" value="insert">
-                    <label for = "inputcomment"><b><?=$_SESSION['ses_user']?></b>&nbsp;&nbsp;</label>
+                <td align = center width = 100>
+                    <b><?=$_SESSION['ses_user']?></b></td>
+                <td><input type="hidden" name="comment" value="insert">
                     <input type="text"  style = "height:20px" size=" 140" name="inputcomment"></td>
                 <td align = right style = "padding-right: 3%" width = 200><input class = button4 type="submit" name="submit" value="댓글 등록하기"></td>
                 </tr>
