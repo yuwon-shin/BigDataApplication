@@ -82,6 +82,18 @@
             background: #FF607F;
             line-height: 30px;
         }
+
+
+        .button1{
+            height: 60px;
+            width: 150px;
+            font-size: 18px;
+            text-align: center;
+            background-color: white;
+            border: 2px solid black;
+            border-radius: 10px
+
+        }
     </style>
 
 </head>
@@ -94,9 +106,9 @@
 
 <form name="member" method="POST" action="resultSex.php?testIdx=<?=$testIdx?>">
     <div align="center">
-        나<input type="checkbox" name="me" <?php if ($_POST['me']): ?>checked='checked'<?php endif; ?>>
-        여자<input type="checkbox" name="girl" <?php if ($_POST['girl']): ?>checked='checked'<?php endif; ?>>
-        남자<input type="checkbox" name="boy" <?php if ($_POST['boy']): ?>checked='checked'<?php endif; ?>>
+        나<input type="checkbox" name="me" <?php if (isset($_POST['me']) and $_POST['me']='on'){ ?>checked='checked'<?php }else{} ?>>
+        여자<input type="checkbox" name="girl" <?php if (isset($_POST['girl']) and $_POST['girl']='on'){ ?>checked='checked'<?php }else{} ?>>
+        남자<input type="checkbox" name="boy" <?php if (isset($_POST['boy']) and $_POST['boy']='on'){ ?>checked='checked'<?php }else{} ?>>
         <br><br>
         <input class = "button1"type=submit value="결과보기">
         <br><br>
@@ -104,13 +116,13 @@
 </form>
 
 <?php
-if(isset($_POST['me'])){$_POST['me']=1;}
+if(isset($_POST['me'])){$_POST['me']='on';}
 else{$_POST['me']=0;}
 
-if(isset($_POST['boy'])){$_POST['boy']=1;}
+if(isset($_POST['boy'])){$_POST['boy']='on';}
 else{$_POST['boy']=0;}
 
-if(isset($_POST['girl'])){$_POST['girl']=1;}
+if(isset($_POST['girl'])){$_POST['girl']='on';}
 else{$_POST['girl']=0;}
 ?>
 
@@ -171,5 +183,12 @@ else{$_POST['girl']=0;}
     ?>
     </tbody>
 </table>
+
+<br><br><br>
+<div align="middle">
+    <button class = "button1" onclick = "location.href = 'result.php?testIdx=<?=$testIdx?>'">전체 분석</button>
+    <button class = "button1" onclick = "location.href = 'resultJob.php?testIdx=<?=$testIdx?>'">분야 별 분석</button>
+    <button class = "button1" onclick = "location.href = 'resultAge.php?testIdx=<?=$testIdx?>'">연령 별 분석</button>
+</div>
 
 </body>

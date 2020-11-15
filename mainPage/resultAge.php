@@ -70,10 +70,17 @@ $rows=mysqli_fetch_assoc($res);
 
     <tbody>
 
+    <?php
+    if(isset($_POST['memberAge'])){
+    }else{
+        $_POST['memberAge']=$_SESSION['ses_age'];
+    }
+    ?>
+
     <form name="memberAge" method="POST" action="resultAge.php?testIdx=<?=$testIdx?>">
         <div align="center">
             비교할 연령을 입력해주세요
-            <input type="text" size="30" name="memberAge">
+            <input type="text" size="30" name="memberAge" value=<?php echo $_POST['memberAge'];?>>
             <input class = "button1"type=submit value="결과보기">
         </div>
     </form>
@@ -81,7 +88,6 @@ $rows=mysqli_fetch_assoc($res);
     <br>
 
     <?php
-
 
     $query1 = "select round(AVG(answer1),1),round(AVG(answer2),1), round(AVG(answer3),1),round(AVG(answer4),1),round(AVG(answer5),1)
                 ,round(AVG(answer6),1),round(AVG(answer7),1),round(AVG(answer8),1),round(AVG(answer9),1),round(AVG(answer10),1)
@@ -118,5 +124,13 @@ $rows=mysqli_fetch_assoc($res);
     ?>
     </tbody>
 </table>
+
+<br><br><br>
+<div align="middle">
+    <button class = "button1" onclick = "location.href = 'result.php?testIdx=<?=$testIdx?>'">전체 분석</button>
+    <button class = "button1" onclick = "location.href = 'resultSex.php?testIdx=<?=$testIdx?>'">성별 별 분석</button>
+    <button class = "button1" onclick = "location.href = 'resultJob.php?testIdx=<?=$testIdx?>'">분야 별 분석</button>
+</div>
+
 
 </body>

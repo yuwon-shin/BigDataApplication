@@ -96,6 +96,31 @@
             border-radius: 4px
 
         }
+            .wrap {
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                justify-content: center;
+                padding-top: 40px;
+                align-self: auto;
+            }
+            .container {
+                width: 1200px;
+                text-align: center;
+                background-color: #f1f3f5;
+                border: 4px solid #adb5bd;
+                border-radius: 10px;
+                padding: 30px;
+            }
+            .container1 {
+                width: 1000px;
+                text-align: center;
+                background-color: white;
+                border: 4px solid #868e96;
+                border-radius: 10px;
+                padding: 30px;
+                margin-left:70px;
+            }
         </style>
     </head>
 
@@ -183,6 +208,85 @@
     
         <br><br>
 
+        <!--비슷한 테스트 추천 부분-->
+
+
+        <div class = text>
+            <?php
+            if(isset($_SESSION['ses_user'])){
+            ?>
+        </div>
+
+        <?php
+        $query4 = "select t.testIdx, t.testTitle,t.testCategory,t.hit, tbnew.answerNm  from (
+                    select a.tbTest_testIdx, count(a.answerIdx) as answerNm from (select answerIdx,tbTest_testIdx,tbMember_memberIdx from tbAnswer
+                    where tbTest_testIdx = 4) as testMember
+                    left outer join tbAnswer a
+                    on testMember.tbMember_memberIdx = a.tbMember_memberIdx
+                    where a.tbMember_memberIdx!=7 and a.tbTest_testIdx!=4
+                    group by a.tbTest_testIdx
+                    order by answerNm desc) as tbnew
+                    left outer join tbTest t
+                    on t.testIdx=tbnew.tbTest_testIdx;";
+        $res5 = mysqli_query($conn, $query4);
+
+        ?>
+
+
+
+            <div class = wrap>
+                <div class = container>
+
+                    <h2><font color = #495057><b>&nbsp;&nbsp;[비슷한 테스트 추천]</b></font></h2><br>
+                    <h3 align = left><font color = #868e96><b>&nbsp;&nbsp;&nbsp;&nbsp;이 테스트를 응답한 사람들은 어떤 테스트를 응답했을까?</b></font></h3>
+                    <div class = container1 >
+                        <table  algin = center>
+                            <thead>
+                            <tr style = "border-bottom: 2px solid #444444">
+                                <td width = "100" align="center" style = "background: #efefef"><b>Ranking</b></td>
+                                <td width = "80" align = "center">번호</td>
+                                <td width = "250" align = "center">제목</td>
+                                <td width = "100" align = "center">카테고리</td>
+                                <td width = "100" align = "center">조회수</td>
+                                <td width = "100" align = "center">응답수</td>
+                                <td width = "150" align = "center">찜</td>
+                            </tr>
+                            </thead>
+
+                            <tbody>
+                            <?php
+                            $i = 0;
+                            while($rows5 = mysqli_fetch_assoc($res5)){
+                                $i++;
+
+                                ?>  <tr>
+                                    <td width = "100" align = "center" style = "background: #efefef"><b>Top <?=$i?></b></td>
+                                    <td width = "80" align = "center"><?php echo $rows5['testIdx']?></td>
+                                    <td width = "250" align = "center"><?php echo $rows5['testTitle']?></td>
+                                    <td width = "100" align = "center"><?php echo $rows5['testCategory']?></td>
+                                    <td width = "100" align = "center"><?php echo $rows5['hit']?></td>
+                                    <td width = "100" align = "center"><?php echo $rows5['answerNm']?></td>
+                                    <td width = "150" align = "center"><input class = "button3" type = "button"  name="joinTest"  value = "테스트 참여하기" onclick = "location.href= 'joinTest.php?testIdx=<?php echo $rows5['testIdx']?>'"></td>
+                                </tr>
+                            <?php    }
+                            ?>
+                            </tbody>
+                        </table>
+                    </div><br>
+
+
+                    </tbody>
+                    </table>
+                </div><br>
+
+            </div>
+            </div><br><br>
+        <?php
+        } ?>
+
+
+
+
         <?php
         //댓글 작성 부분
         if(isset($_SESSION['ses_user'])){ ?>
@@ -203,6 +307,10 @@
             </form>
         <?php
         } ?>
+
+
+
+
 
 
         <!--댓글 목록 부분-->

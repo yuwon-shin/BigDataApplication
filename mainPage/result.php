@@ -51,11 +51,11 @@
         }
         /*시험*/
         .circle0{
-            width: 30px;
-            height: 30px;
+            width: 10px;
+            height: 10px;
             border-radius: 50%;
             background: red;
-            line-height: 30px;
+            line-height: 10px;
         }
 
         /*평균*/
@@ -80,7 +80,7 @@
 </head>
 
 <body>
-    <br><h1 align = center>결과 분석<br><br></h1>
+    <br><h1 align = center>전체 결과 분석<br><br></h1>
 
 
 
@@ -114,7 +114,7 @@
 
                 <td colspan=5 style="padding:0px">
                     <!--시험-->
-                    <div class = 'circle0' style="position:relative; left:0%"></div>
+                    <div class = 'circle0' style="position:relative; center:0%" align="center"></div>
                     <div class = 'circle0' style="position:relative; left:10%"></div>
                     <div class = 'circle0' style="position:relative; left:20%"></div>
                     <div class = 'circle0' style="position:relative; left:30%"></div>

@@ -303,21 +303,39 @@ if(isset($_SESSION['ses_index'])){
 </div>
 
 <?php
-$query4 = "SELECT t.testIdx as testIdx, `testTitle`, `testCategory`, `hit`, r.scrapNm as scrap from tbTest  as t inner join(select sc.tbTest_testIdx as idx, count(sc.testScrapIdx) as scrapNm from (select tbTest_testIdx from tbTestScrap s left outer join tbMember m on s.tbMember_memberIdx = memberIdx 
-    where m.memberIdx= {$_SESSION['ses_index']}) as mytest left outer join tbTestScrap sc 
-    on mytest.tbTest_testIdx = sc.tbTest_testIdx where sc.tbMember_memberIdx!={$_SESSION['ses_index']} group by sc.tbTest_testIdx) r on t.testIdx = r.idx order by scrap limit 3";
+$query4 = "SELECT t.testIdx as testIdx, `testTitle`, `testCategory`, `hit`, r.scrapNm as scrap 
+from tbTest  as t 
+inner join(select sc.tbTest_testIdx as idx, count(sc.testScrapIdx) as scrapNm from 
+(select tbTest_testIdx from tbTestScrap s left outer join tbMember m on s.tbMember_memberIdx = memberIdx 
+where m.memberIdx= {$_SESSION['ses_index']}) as mytest 
+left outer join tbTestScrap sc 
+on mytest.tbTest_testIdx = sc.tbTest_testIdx 
+where sc.tbMember_memberIdx!={$_SESSION['ses_index']} 
+group by sc.tbTest_testIdx) r 
+on t.testIdx = r.idx order by scrap limit 3";
 $res5 = mysqli_query($conn, $query4);
 
 
-$query5 = "SELECT t.testIdx as testIdx, `testTitle`, `testCategory`, `hit`, r.scrapNm as scrap from tbTest  as t inner join(select s.tbTest_testIdx as idx ,count(testScrapIdx) as scrapNm from tbTestScrap s left outer join tbMember m on s.tbMember_memberIdx = memberIdx where m.memberSex= '{$_SESSION['ses_sex']}'
-    group by s.tbTest_testIdx) r on t.testIdx = r.idx order by scrap desc limit 3";
+$query5 = "SELECT t.testIdx as testIdx, `testTitle`, `testCategory`, `hit`, r.scrapNm as scrap 
+from tbTest as t 
+inner join(select s.tbTest_testIdx as idx ,count(testScrapIdx) as scrapNm 
+from tbTestScrap s 
+left outer join tbMember m 
+on s.tbMember_memberIdx = memberIdx where m.memberSex= '{$_SESSION['ses_sex']}'
+group by s.tbTest_testIdx) r 
+on t.testIdx = r.idx order by scrap desc limit 3";
 $res6 = mysqli_query($conn, $query5);
 
-$query6 = "SELECT t.testIdx as testIdx, `testTitle`, `testCategory`, `hit`, r.scrapNm as scrap from tbTest  as t inner join(select s.tbTest_testIdx as idx ,count(testScrapIdx) as scrapNm from tbTestScrap s left outer join tbMember m on s.tbMember_memberIdx = memberIdx where m.memberAge= '{$_SESSION['ses_age']}'
-    group by s.tbTest_testIdx) r on t.testIdx = r.idx order by scrap desc limit 3";
+$query6 = "SELECT t.testIdx as testIdx, `testTitle`, `testCategory`, `hit`, r.scrapNm as scrap 
+from tbTest as t 
+inner join(select s.tbTest_testIdx as idx ,count(testScrapIdx) as scrapNm from tbTestScrap s 
+left outer join tbMember m on s.tbMember_memberIdx = memberIdx where m.memberAge= '{$_SESSION['ses_age']}'
+group by s.tbTest_testIdx) r on t.testIdx = r.idx order by scrap desc limit 3";
 $res7 = mysqli_query($conn, $query6);
 
-$query7 = "SELECT t.testIdx as testIdx, `testTitle`, `testCategory`, `hit`, r.scrapNm as scrap from tbTest  as t inner join(select s.tbTest_testIdx as idx ,count(testScrapIdx) as scrapNm from tbTestScrap s left outer join tbMember m on s.tbMember_memberIdx = memberIdx where m.memberJob= '{$_SESSION['ses_job']}'
+$query7 = "SELECT t.testIdx as testIdx, `testTitle`, `testCategory`, `hit`, r.scrapNm as scrap
+ from tbTest as t inner join(select s.tbTest_testIdx as idx ,count(testScrapIdx) as scrapNm from tbTestScrap s 
+ left outer join tbMember m on s.tbMember_memberIdx = memberIdx where m.memberJob= '{$_SESSION['ses_job']}'
     group by s.tbTest_testIdx ) r on t.testIdx = r.idx order by scrap desc limit 3";
 $res8 = mysqli_query($conn, $query7);
 ?>
