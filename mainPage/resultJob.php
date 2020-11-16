@@ -46,9 +46,9 @@ for($i=0;$i<count($jobs);$i=$i+1){
             width: 30px;
             height: 30px;
             border-radius: 50%;
-            left-margin: 0px;
-            background: #0A6ECD;
+            background: gray;
             line-height: 30px;
+            text-align: center;
         }
 
         .button1{
@@ -58,8 +58,16 @@ for($i=0;$i<count($jobs);$i=$i+1){
             text-align: center;
             background-color: white;
             border: 2px solid black;
-            border-radius: 10px
+            border-radius: 10px;
 
+        }
+
+        .wrap {
+            position : relative;
+            display: flex;
+            flex-direction: row;
+            padding-top: 10px;
+            align-items: center;
         }
 
 
@@ -122,18 +130,19 @@ else{$_POST['me']=0;}
             <td height=30 width = "700" align = "center"><?php echo $rows['question'.$i]?></td>
             <td height=30 width = "120" align = "center"><?php echo $rows['label'.$i.'_1']?></td>
 
-            <!--내 응답 부분-->
-            <?php if($_POST['me']) {?><td height=30 width = "50" align = "center"><?php echo $_SESSION['answer'.$i]?></td><?php }
-            else{}?>
+            <td colspan=5 style="padding:0px">
+                <div class = wrap>
+                <!--내 응답 부분-->
+                <?php if($_POST['me']) {?>
+                    <div class='circle' style="position:absolute; margin-left: <?php echo (($_SESSION['answer'.$i]-1)*20+5).'%'?>"><?php echo $_SESSION['answer'.$i]?></div>
+                <?php } else{}?>
 
-            <td colspan=3 width = "50" align = "center"><hr></td>
-
-            <!--평균 부분-->
-            <td height=30 width = "50" align = "center">
                 <?php
                     for($j=0;$j<count($jobs);$j=$j+1){
-                        if($_POST[$jobs[$j]]){echo ${'rows'.$j}['round(AVG(answer'.$i.'),1)'];}
-                        else{}
+                        if($_POST[$jobs[$j]]){?>
+                            <div class="circle" style="position:absolute; margin-left:<?php echo ((${'rows'.$j}['round(AVG(answer'.$i.'),1)']-1)*20+5).'%'?>" >
+                            <?php echo ${'rows'.$j}['round(AVG(answer'.$i.'),1)']?></div>
+                        <?php } else{}
                     }
 
 

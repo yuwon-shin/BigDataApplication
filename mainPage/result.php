@@ -49,6 +49,11 @@
             border-radius: 10px
 
         }
+        .wrap {
+            display: flex;
+            flex-direction: row;
+            padding-top: 10px;
+        }
         /*시험*/
         .circle0{
             width: 10px;
@@ -65,6 +70,7 @@
             border-radius: 50%;
             background: #000000;
             line-height: 30px;
+            text-align: center;
         }
         /*나*/
         .circle1{
@@ -73,6 +79,7 @@
             border-radius: 50%;
             background: #00d3d3;
             line-height: 30px;
+            text-align: center;
         }
 
     </style>
@@ -83,7 +90,11 @@
     <br><h1 align = center>전체 결과 분석<br><br></h1>
 
 
-
+    <div align = right style = "display: flex; flex-direction: row;margin-left: 88%">
+        <div class = circle style = "margin-right: 10px"></div>
+        <div class = circle1></div>
+    </div>
+    <p align = right style = "margin-right: 8%">AVG / ME</p>
     <table style = "padding-top:20px" align = center>
         <thead>
         <tr>
@@ -113,24 +124,23 @@
 
 
                 <td colspan=5 style="padding:0px">
-                    <!--시험-->
-                    <div class = 'circle0' style="position:relative; center:0%" align="center"></div>
-                    <div class = 'circle0' style="position:relative; left:10%"></div>
-                    <div class = 'circle0' style="position:relative; left:20%"></div>
-                    <div class = 'circle0' style="position:relative; left:30%"></div>
-                    <div class = 'circle0' style="position:relative; left:40%"></div>
-                    <div class = 'circle0' style="position:relative; left:50%"></div>
-                    <div class = 'circle0' style="position:relative; left:60%"></div>
-                    <div class = 'circle0' style="position:relative; left:70%"></div>
-                    <div class = 'circle0' style="position:relative; left:80%"></div>
-                    <div class = 'circle0' style="position:relative; left:90%"></div>
-                    <div class = 'circle0' style="position:relative; left:100%"></div>
-                    <div class = 'circle0' style="position:relative; left:<?php echo ($rows1['round(AVG(answer'. $i .'),1)']*25-25)."%" ?>"></div>
-                    <!--평균-->
-                    <div class ='circle' style="display:flex;position:relative; margin-left: <?php echo ($rows1['round(AVG(answer'. $i .'),1)']*50-40)."px" ?>"></div>
+                    
+                    <div class = wrap>
+                    <?php
+                    if($rows1['round(AVG(answer'. $i .'),1)']>=$_SESSION['answer'.$i]){
+                    ?>
                     <!--나-->
-                    <div class ='circle1' style="display:flex;position:relative; margin-left: <?php echo ($_SESSION['answer'.$i]*50-40)."px" ?>"></div>
-                    <hr>
+                    <div class ='circle1' style="display:flex;position:relative; margin-left: <?php echo (($_SESSION['answer'.$i]-1)*20+5)."%" ?>"></div>
+                    <!--평균-->
+                    <div class ='circle' style="display:flex;position:relative; margin-left: <?php echo(($rows1['round(AVG(answer'. $i .'),1)']-$_SESSION['answer'.$i]-1)*20+11)."%" ?>"></div>
+                    <?php
+                    }else{ ?>
+                        <!--평균-->
+                        <div class ='circle' style="display:flex;position:relative; margin-left: <?php echo (($rows1['round(AVG(answer'. $i .'),1)']-1)*20+5)."%" ?>"></div>
+                        <!--나-->
+                        <div class ='circle1' style="display:flex;position:relative; margin-left: <?php echo (($_SESSION['answer'.$i]-$rows1['round(AVG(answer'. $i .'),1)']-1)*20+11)."%" ?>"></div>
+                    <?php
+                    }  ?>
                 </td>
 
                 <td height=30 width = "120" align = "center"><?php echo $rows['label'.$i.'_5']?></td>
