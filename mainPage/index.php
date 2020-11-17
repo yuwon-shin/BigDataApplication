@@ -54,6 +54,18 @@ include '../include/session.php';
             text-align: center;
             margin-top:8px;
         }
+        .button0{
+            height: 32px;
+            width: 32px;
+            font-size: 20px;
+            text-align: center;
+            color:red;
+            margin-bottom: 5px;
+            background: 0;
+            border: 0;
+            border-radius: 4px;
+            outline: 0;
+        }
         .button1{
             height: 32px;
             width: 90px;
@@ -205,7 +217,7 @@ if(isset($_SESSION['ses_index'])){
         <td width = "100" align = "center">작성자</td>
         <td width = "200" align = "center">날짜</td>
         <td width = "50" align = "center">조회수</td>
-        <td width = "80" align = "center">테스트찜</td>
+        <td width = "80" align = "center">찜 수</td>
         <td width = "80" align = "center">찜</td>
     </tr>
     </thead>
@@ -268,13 +280,13 @@ if(isset($_SESSION['ses_index'])){
                     <?php
                     if ($rows4['testScYN']){ ?>
                         <form method = "post">
-                            <input class = "button1" type="button" name="insertscrap" value = "찜취소" onclick = "location.href= 'testScrap.php?scrap=1&testIdx=<?php echo $rows['testIdx']?>'">
+                            <input class = "button0" type="button" name="insertscrap" value = "❤" onclick = "location.href= 'testScrap.php?scrap=1&testIdx=<?php echo $rows['testIdx']?>'">
                         </form>
 
                         <?php
                     }else{?>
                         <form method = "post">
-                            <input class = "button1" type = "button"  name="deletescrap"  value = "찜하기" onclick = "location.href= 'testScrap.php?scrap=0&testIdx=<?php echo $rows['testIdx']?>'">
+                            <input class = "button0" type = "button"  name="deletescrap"  value = "♡" onclick = "location.href= 'testScrap.php?scrap=0&testIdx=<?php echo $rows['testIdx']?>'">
                         </form>
                         <?php
                     }
@@ -356,8 +368,8 @@ $res8 = mysqli_query($conn, $query7);
                     <td width = "250" align = "center">제목</td>
                     <td width = "100" align = "center">카테고리</td>
                     <td width = "100" align = "center">조회수</td>
-                    <td width = "100" align = "center">테스트찜</td>
-                    <td width = "150" align = "center">찜</td>
+                    <td width = "100" align = "center">찜 수</td>
+                    <td width = "150" align = "center"></td>
                 </tr>
             </thead>
 
@@ -392,8 +404,8 @@ $res8 = mysqli_query($conn, $query7);
                     <td width = "250" align = "center">제목</td>
                     <td width = "100" align = "center">카테고리</td>
                     <td width = "100" align = "center">조회수</td>
-                    <td width = "100" align = "center">테스트찜</td>
-                    <td width = "150" align = "center">찜</td>
+                    <td width = "100" align = "center">찜 수</td>
+                    <td width = "150" align = "center"></td>
                 </tr>
             </thead>
 
@@ -428,8 +440,8 @@ $res8 = mysqli_query($conn, $query7);
                     <td width = "250" align = "center">제목</td>
                     <td width = "100" align = "center">카테고리</td>
                     <td width = "100" align = "center">조회수</td>
-                    <td width = "100" align = "center">테스트찜</td>
-                    <td width = "150" align = "center">찜</td>
+                    <td width = "100" align = "center">찜 수</td>
+                    <td width = "150" align = "center"></td>
                 </tr>
             </thead>
 
@@ -464,8 +476,8 @@ $res8 = mysqli_query($conn, $query7);
                     <td width = "250" align = "center">제목</td>
                     <td width = "100" align = "center">카테고리</td>
                     <td width = "100" align = "center">조회수</td>
-                    <td width = "100" align = "center">테스트찜</td>
-                    <td width = "150" align = "center">찜</td>
+                    <td width = "100" align = "center">찜 수</td>
+                    <td width = "150" align = "center"></td>
                 </tr>
             </thead>
 

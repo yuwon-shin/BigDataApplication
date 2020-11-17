@@ -70,10 +70,11 @@
             margin-top:8px;
             }
             .button3{
-            height: 30px;
-            width: 90px;
+            height: 32px;
+            width: 120px;
             font-size: 13px;
             text-align: center;
+            margin-bottom: 5px;
             background-color: white;
             border: 2px solid black;
             border-radius: 4px
@@ -128,7 +129,7 @@
          
 
         <h3 align = center>- <?=$content?> -<br></h3>
-        <h4 align="right" style = "padding-right: 4%">[Category] <?=$category?></h4>
+        <h4 align="right" style = "padding-right: 7%">[Category] <?=$category?></h4>
         <form method = "post" action = "./saveAnswer.php">
             <table style = "padding-top:20px" align = center>
                 <thead>

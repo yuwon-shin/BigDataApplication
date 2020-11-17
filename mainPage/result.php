@@ -135,7 +135,9 @@
                     <div class ='circle' style="display:flex;position:relative; margin-left: <?php echo(($rows1['round(AVG(answer'. $i .'),1)']-$_SESSION['answer'.$i]-1)*20+11)."%" ?>"></div>
                     <?php
                     }else{ ?>
+                        <!--평균-->
                         <div class ='circle' style="display:flex;position:relative; margin-left: <?php echo (($rows1['round(AVG(answer'. $i .'),1)']-1)*20+5)."%" ?>"></div>
+                        <!--나-->
                         <div class ='circle1' style="display:flex;position:relative; margin-left: <?php echo (($_SESSION['answer'.$i]-$rows1['round(AVG(answer'. $i .'),1)']-1)*20+11)."%" ?>"></div>
                     <?php
                     }  ?>
@@ -155,5 +157,6 @@
         <button class = "button1" onclick = "location.href = 'resultSex.php?testIdx=<?=$testIdx?>'">성별 별 분석</button>
         <button class = "button1" onclick = "location.href = 'resultJob.php?testIdx=<?=$testIdx?>'">분야 별 분석</button>
         <button class = "button1" onclick = "location.href = 'resultAge.php?testIdx=<?=$testIdx?>'">연령 별 분석</button>
+        <button class = "button1" onclick = "location.href = './index.php'">목록으로</button>
     </div>
 </body>

@@ -47,6 +47,24 @@ $rows=mysqli_fetch_assoc($res);
             border-radius: 10px
 
         }
+
+        .wrap {
+            position : relative;
+            display: flex;
+            flex-direction: row;
+            padding-top: 10px;
+            align-items: center;
+        }
+
+        .circle{
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            background: #CC3D3D;
+            line-height: 30px;
+            text-align: center;
+        }
+
     </style>
 
 </head>
@@ -108,13 +126,13 @@ $rows=mysqli_fetch_assoc($res);
             <td height=30 width = "700" align = "center"><?php echo $rows['question'.$i]?></td>
             <td height=30 width = "120" align = "center"><?php echo $rows['label'.$i.'_1']?></td>
 
-            <!--내 응답 부분-->
-            <td height=30 width = "50" align = "center"><?php echo $_SESSION['answer'.$i]?></td>
-
-            <td colspan=3 width = "50" align = "center"><hr></td>
-
-            <!--평균 부분-->
-            <td height=30 width = "50" align = "center"><?php echo $rows1['round(AVG(answer'.$i.'),1)']?></td>
+            <td colspan=5 width = "50" align = "center">
+                <div class=wrap>
+                    <!--내 응답 부분-->
+                    <div class=circle style="position:absolute; margin-left: <?php echo (($_SESSION['answer'.$i]-1)*20+5).'%'?>"><?php echo $_SESSION['answer'.$i]?></div>
+                    <!--평균 부분-->
+                    <div class="circle" style="background: #FAE0D4;position:absolute; margin-left: <?php echo (($rows1['round(AVG(answer'.$i.'),1)']-1)*20+5).'%'?>"><?php echo $rows1['round(AVG(answer'.$i.'),1)']?></div>
+            </td>
 
             <td height=30 width = "120" align = "center"><?php echo $rows['label'.$i.'_5']?></td>
         </tr>
@@ -130,6 +148,7 @@ $rows=mysqli_fetch_assoc($res);
     <button class = "button1" onclick = "location.href = 'result.php?testIdx=<?=$testIdx?>'">전체 분석</button>
     <button class = "button1" onclick = "location.href = 'resultSex.php?testIdx=<?=$testIdx?>'">성별 별 분석</button>
     <button class = "button1" onclick = "location.href = 'resultJob.php?testIdx=<?=$testIdx?>'">분야 별 분석</button>
+    <button class = "button1" onclick = "location.href = './index.php'">목록으로</button>
 </div>
 
 
