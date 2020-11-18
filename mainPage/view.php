@@ -344,8 +344,9 @@
             <button class = "button" onclick = "location.href = './index.php'">목록으로</button>
         <?php
         }else{
-        ?>
-            <button class = "button" onclick = "location.href = './deleteTest.php?testIdx=<?=$testIdx?>'">삭제완료</button>
+        ?>  
+            <button class = "button" onclick = "location.href = './deleteTest.php?delete=0&testIdx=<?=$testIdx?>'">되돌리기</button>
+            <button class = "button" onclick = "location.href = './deleteTest.php?delete=1&testIdx=<?=$testIdx?>'">삭제완료</button>
         <?php   
         }
         ?>
@@ -355,7 +356,6 @@
        <br><br>
        <?php
         mysqli_free_result($res);
-        mysqli_close($conn)
         ?>
 </body>
 </html>

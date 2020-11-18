@@ -50,9 +50,11 @@
 
         }
         .wrap {
+            position : relative;
             display: flex;
             flex-direction: row;
             padding-top: 10px;
+            align-items: center;
         }
         /*시험*/
         .circle0{
@@ -68,9 +70,9 @@
             width: 30px;
             height: 30px;
             border-radius: 50%;
-            background: #000000;
-            line-height: 30px;
+            background: gray;
             text-align: center;
+            line-height: 30px;
         }
         /*나*/
         .circle1{
@@ -90,11 +92,19 @@
     <br><h1 align = center>전체 결과 분석<br><br></h1>
 
 
-    <div align = right style = "display: flex; flex-direction: row;margin-left: 88%">
-        <div class = circle style = "margin-right: 10px"></div>
-        <div class = circle1></div>
-    </div>
-    <p align = right style = "margin-right: 8%">AVG / ME</p>
+    <table align="center">
+        <tr align="center">
+            <td><div class = circle1></div></td>
+            <td><div class = circle></div></td>
+        </tr>
+
+        <tr align="center">
+            <td>나</td>
+            <td>평균</td>
+        </tr>
+    </table>
+
+    <br>
     <table style = "padding-top:20px" align = center>
         <thead>
         <tr>
@@ -124,23 +134,15 @@
 
 
                 <td colspan=5 style="padding:0px">
-                    
                     <div class = wrap>
-                    <?php
-                    if($rows1['round(AVG(answer'. $i .'),1)']>=$_SESSION['answer'.$i]){
-                    ?>
-                    <!--나-->
-                    <div class ='circle1' style="display:flex;position:relative; margin-left: <?php echo (($_SESSION['answer'.$i]-1)*20+5)."%" ?>"></div>
-                    <!--평균-->
-                    <div class ='circle' style="display:flex;position:relative; margin-left: <?php echo(($rows1['round(AVG(answer'. $i .'),1)']-$_SESSION['answer'.$i]-1)*20+11)."%" ?>"></div>
-                    <?php
-                    }else{ ?>
-                        <!--평균-->
-                        <div class ='circle' style="display:flex;position:relative; margin-left: <?php echo (($rows1['round(AVG(answer'. $i .'),1)']-1)*20+5)."%" ?>"></div>
-                        <!--나-->
-                        <div class ='circle1' style="display:flex;position:relative; margin-left: <?php echo (($_SESSION['answer'.$i]-$rows1['round(AVG(answer'. $i .'),1)']-1)*20+11)."%" ?>"></div>
-                    <?php
-                    }  ?>
+                        <!--남성 평균-->
+
+                        <div class ='circle' style="position:absolute; margin-left: <?php echo(($rows1['round(AVG(answer'. $i .'),1)']-1)*20+5)."%" ?>">
+                            <?php echo $rows1['round(AVG(answer'. $i .'),1)']?>
+                            </div>
+                        <div class ='circle1' style="position:absolute; margin-left: <?php echo (($_SESSION['answer'.$i]-1)*20+5)."%" ?>">
+                            <?php echo $_SESSION['answer'.$i]?>
+                            </div>
                 </td>
 
                 <td height=30 width = "120" align = "center"><?php echo $rows['label'.$i.'_5']?></td>
@@ -157,5 +159,7 @@
         <button class = "button1" onclick = "location.href = 'resultSex.php?testIdx=<?=$testIdx?>'">성별 별 분석</button>
         <button class = "button1" onclick = "location.href = 'resultJob.php?testIdx=<?=$testIdx?>'">분야 별 분석</button>
         <button class = "button1" onclick = "location.href = 'resultAge.php?testIdx=<?=$testIdx?>'">연령 별 분석</button>
+        <button class = "button1" onclick = "location.href = 'resultAge.php?testIdx=<?=$testIdx?>'">연령 별 분석</button>
+        <button class = "button1" onclick = "location.href = './index.php'">목록으로</button>
     </div>
 </body>

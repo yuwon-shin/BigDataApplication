@@ -19,6 +19,7 @@ for($i=0;$i<count($jobs);$i=$i+1){
     ${'rows'.$i} = mysqli_fetch_assoc(${'res'.$i});
 }
 
+$colors = array("#FFD8D8","#FAE0D4","#FAF4C0","#D9E5FF","#DAD9FF","#FFD9EC","#EAEAEA");
 
 ?>
 
@@ -83,15 +84,40 @@ for($i=0;$i<count($jobs);$i=$i+1){
         나<input type="checkbox" name="me" <?php if (isset($_POST['me']) and $_POST['me']='on'){ ?>checked='checked'<?php }else{} ?>>
         <?php
         $jobs = array("이공계열","인문계열","사회계열","의약계열","예체능계열","교육계열","직장인");
+
         for($i=0;$i<count($jobs);$i=$i+1){
         echo $jobs[$i]?>
         <input type=checkbox name="<?php echo $jobs[$i]?>" <?php if (isset($_POST[$jobs[$i]]) and $_POST[$jobs[$i]]='on'){ ?>checked='checked'<?php }else{} ?>>
-        <?php } ?>
-        <br><br>
+        <?php } ?>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
         <input class = "button1" type=submit value="결과보기">
         <br><br>
     </div>
 </form>
+
+
+<table align="center">
+    <tr>
+        <td align="center"><div class = circle></div></td>
+        <?php
+        for($i=0;$i<7;$i=$i+1){
+            ?><td align="center"><div class = circle style='background:<?php echo $colors[$i]?>'></div></td><?php
+        }
+        ?>
+    </tr>
+
+    <tr>
+        <td align="center">나</td>
+        <td align="center">이공계열</td>
+        <td align="center">인문계열</td>
+        <td align="center">사회계열</td>
+        <td align="center">의약계열</td>
+        <td align="center">예체능계열</td>
+        <td align="center">교육계열</td>
+        <td align="center">직장인계열</td>
+    </tr>
+</table>
+
+<br>
 
 <?php
 for($i=0;$i<count($jobs);$i=$i+1){
@@ -123,6 +149,7 @@ else{$_POST['me']=0;}
     <?php
     $i=1;
 
+
     while($i < 11){
         ?>
         <tr>
@@ -140,7 +167,7 @@ else{$_POST['me']=0;}
                 <?php
                     for($j=0;$j<count($jobs);$j=$j+1){
                         if($_POST[$jobs[$j]]){?>
-                            <div class="circle" style="position:absolute; margin-left:<?php echo ((${'rows'.$j}['round(AVG(answer'.$i.'),1)']-1)*20+5).'%'?>" >
+                            <div class="circle" style="background:<?php echo $colors[$j]?>;position:absolute; margin-left:<?php echo ((${'rows'.$j}['round(AVG(answer'.$i.'),1)']-1)*20+5).'%'?>" >
                             <?php echo ${'rows'.$j}['round(AVG(answer'.$i.'),1)']?></div>
                         <?php } else{}
                     }
@@ -164,6 +191,7 @@ else{$_POST['me']=0;}
     <button class = "button1" onclick = "location.href = 'result.php?testIdx=<?=$testIdx?>'">전체 분석</button>
     <button class = "button1" onclick = "location.href = 'resultSex.php?testIdx=<?=$testIdx?>'">성별 별 분석</button>
     <button class = "button1" onclick = "location.href = 'resultAge.php?testIdx=<?=$testIdx?>'">연령 별 분석</button>
+    <button class = "button1" onclick = "location.href = './index.php'">목록으로</button>
 </div>
 
 </body>

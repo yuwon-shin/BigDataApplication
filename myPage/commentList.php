@@ -34,6 +34,18 @@
                 text-align: center;
                 margin-top:8px;
             }
+            .button0{
+                height: 32px;
+                width: 32px;
+                font-size: 20px;
+                text-align: center;
+                color:red;
+                margin-bottom: 5px;
+                background: 0;
+                border: 0;
+                border-radius: 4px;
+                outline: 0;
+            }
             .button1{
                 height: 32px;
                 width: 90px;
@@ -170,7 +182,7 @@
                                     if ($rows3['comLikeYN']){ ?>
                                         <td width = "150" align = "center">
                                             <form action = '../mainPage/comment.php?&commentIdx=<?php echo $rows['commentIdx']?>' method = "post">
-                                                <input class = "button5"  style = "margin-top: 10px" height = 80% width = 80% type="submit" name="mycomment" value = "좋아요취소" >
+                                                <input class = "button0"  style = "margin-top: 10px" height = 80% width = 80% type="submit" name="mycomment" value = "❤" >
                                             </form>
                                         </td>
 
@@ -178,7 +190,7 @@
                                     }else{?>
                                         <td width = "150" align = "center">
                                             <form action = '../mainPage/comment.php?&commentIdx=<?php echo $rows['commentIdx']?>' method = "post">
-                                                <input class = "button5" style = "margin-top: 10px" height = 80% width = 80% type = "submit" name="mycomment"  value = "좋아요하기">
+                                                <input class = "button0" style = "margin-top: 10px" height = 80% width = 80% type = "submit" name="mycomment"  value = "♡">
                                             </form>
                                         </td>
                                         <?php
@@ -186,7 +198,7 @@
                                 }else{  ?>
                                     <td  width = "150" align = "center">
                                         <form action = '../mainPage/comment.php?&commentIdx=<?php echo $rows['commentIdx']?>' method = "post">
-                                            <input class = "button5" style = "margin-top: 10px" height = 80% width = 80% type = "submit" name="mycomment"  value = "좋아요하기" disabled>
+                                            <input class = "button0" style = "margin-top: 10px" height = 80% width = 80% type = "submit" name="mycomment"  value = "♡" disabled>
                                         </form>
                                     </td>
                                     <?php

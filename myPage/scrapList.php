@@ -26,11 +26,17 @@
             table .even{
                 background: #efefef;
             }
-            .button{
-                width: 100px;
-                height: 20px;
+            .button0{
+                height: 32px;
+                width: 32px;
+                font-size: 20px;
                 text-align: center;
-                margin-top:8px;
+                color:red;
+                margin-bottom: 5px;
+                background: 0;
+                border: 0;
+                border-radius: 4px;
+                outline: 0;
             }
             .button1{
                 height: 32px;
@@ -147,7 +153,7 @@
                         <td width = "100" align = "center">작성자</td>
                         <td width = "200" align = "center">날짜</td>
                         <td width = "50" align = "center">조회수</td>
-                        <td width = "80" align = "center">테스트찜</td>
+                        <td width = "80" align = "center">찜 수</td>
                         <td width = "80" align = "center">찜</td>
                     </tr>
                     </thead>
@@ -198,13 +204,13 @@
                                     <?php
                                     if ($rows4['testScYN']){ ?>
                                         <form method = "post">
-                                            <input class = "button1" type="button" name="insertscrap" value = "찜취소" onclick = "location.href= '../mainPage/testScrap2.php?scrap=1&testIdx=<?php echo $rows['testIdx']?>'">
+                                            <input class = "button0" type="button" name="insertscrap" value = "❤" onclick = "location.href= '../mainPage/testScrap2.php?scrap=1&testIdx=<?php echo $rows['testIdx']?>'">
                                         </form>
 
                                         <?php
                                     }else{?>
                                         <form method = "post">
-                                            <input class = "button1" type = "button"  name="deletescrap"  value = "찜하기" onclick = "location.href= '../mainPage/testScrap2.php?scrap=0&testIdx=<?php echo $rows['testIdx']?>'">
+                                            <input class = "button0" type = "button"  name="deletescrap"  value = "♡" onclick = "location.href= '../mainPage/testScrap2.php?scrap=0&testIdx=<?php echo $rows['testIdx']?>'">
                                         </form>
                                         <?php
                                     }

@@ -51,6 +51,16 @@ include '../include/session.php';
             border-radius: 4px
 
         }
+        .button1{
+            height: 40px;
+            width: 150px;
+            font-size: 18px;
+            text-align: center;
+            background-color: white;
+            border: 2px solid black;
+            border-radius: 10px;
+
+        }
 
     </style>
 
@@ -82,6 +92,7 @@ include '../include/session.php';
             </table>
 
         </div>
+        <br><button class = "button1" onclick = "location.href = '../mainPage/index.php'">목록으로</button>
     </div>
     </body>
 </html>
