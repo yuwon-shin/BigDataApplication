@@ -36,13 +36,6 @@
         color: white;
         font-family: 'HeirofLightBold';
     }
-    .button{
-          width: 100px;
-          height: 20px;
-          text-align: center;
-          margin: auto;
-          margin-top:8px;
-          }
     .button1{
           height: 35px;
           width: 90px;

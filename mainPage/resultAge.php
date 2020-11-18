@@ -30,13 +30,6 @@ $rows=mysqli_fetch_assoc($res);
             border-bottom: 1px solid #efefef;
             padding: 10px;
         }
-        .button{
-            width: 400px;
-            height: 23px;
-            text-align: center;
-            margin: auto;
-
-        }
         .button1{
             height: 60px;
             width: 150px;

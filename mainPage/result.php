@@ -56,14 +56,6 @@
             padding-top: 10px;
             align-items: center;
         }
-        /*시험*/
-        .circle0{
-            width: 10px;
-            height: 10px;
-            border-radius: 50%;
-            background: red;
-            line-height: 10px;
-        }
 
         /*평균*/
         .circle{
@@ -158,7 +150,6 @@
     <div align="middle">
         <button class = "button1" onclick = "location.href = 'resultSex.php?testIdx=<?=$testIdx?>'">성별 별 분석</button>
         <button class = "button1" onclick = "location.href = 'resultJob.php?testIdx=<?=$testIdx?>'">분야 별 분석</button>
-        <button class = "button1" onclick = "location.href = 'resultAge.php?testIdx=<?=$testIdx?>'">연령 별 분석</button>
         <button class = "button1" onclick = "location.href = 'resultAge.php?testIdx=<?=$testIdx?>'">연령 별 분석</button>
         <button class = "button1" onclick = "location.href = './index.php'">목록으로</button>
     </div>

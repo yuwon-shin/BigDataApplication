@@ -91,24 +91,16 @@
             border: 2px solid black;
             border-radius: 4px
 
-        }
-        .button4{
-            height: 37px;
-            width: 120px;
-            font-size: 15px;
-            text-align: center;
-            background-color: #ccc;
-            border: 2.5px solid black;
-            border-radius: 10px
-        }
-        .button5{
-            font-size: 13px;
-            text-align: center;
-            background-color: white;
-            border: 2px solid black;
-            border-radius: 4px
-
-        }
+            }
+            .button4{
+                height: 37px;
+                width: 120px;
+                font-size: 15px;
+                text-align: center;
+                background-color: #ccc;
+                border: 2.5px solid black;
+                border-radius: 10px
+            }
             .wrap {
                 display: flex;
                 flex-direction: column;

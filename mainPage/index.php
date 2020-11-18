@@ -108,28 +108,6 @@ include '../include/session.php';
             text-decoration: underline;
         }
 
-        .heart {
-            width: 500px;
-            height: 500px;
-            background: #ea2027;
-            position: relative;
-            transform: rotate(45deg);
-        }
-        .heart::before,
-        .heart::after {
-            content: "";
-            width: 500px;
-            height: 500px;
-            position: absolute;
-            border-radius: 50%;
-            background: #ea2027;
-        }
-        .heart::before {
-            left: -50%;
-        }
-        .heart::after {
-            top: -50%;
-        }
         .wrap {
             display: flex;
             flex-direction: column;

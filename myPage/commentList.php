@@ -28,12 +28,6 @@
             table .even{
                 background: #efefef;
             }
-            .button{
-                width: 100px;
-                height: 20px;
-                text-align: center;
-                margin-top:8px;
-            }
             .button0{
                 height: 32px;
                 width: 32px;
@@ -45,59 +39,6 @@
                 border: 0;
                 border-radius: 4px;
                 outline: 0;
-            }
-            .button1{
-                height: 32px;
-                width: 90px;
-                font-size: 13px;
-                text-align: center;
-                margin-bottom: 5px;
-                background-color: white;
-                border: 2px solid black;
-                border-radius: 4px
-
-            }
-            .button2{
-                height: 30px;
-                width: 120px;
-                font-size: 13px;
-                text-align: center;
-                margin-bottom: 5px;
-                background-color: white;
-                border: 2px solid black;
-                border-radius: 4px
-
-            }
-            .text {
-                font-size: 15px;
-                padding-top:20px;
-                text-align:center;
-            }
-            .text:hover{
-                text-decoration: underline;
-            }
-
-            .heart {
-                width: 500px;
-                height: 500px;
-                background: #ea2027;
-                position: relative;
-                transform: rotate(45deg);
-            }
-            .heart::before,
-            .heart::after {
-                content: "";
-                width: 500px;
-                height: 500px;
-                position: absolute;
-                border-radius: 50%;
-                background: #ea2027;
-            }
-            .heart::before {
-                left: -50%;
-            }
-            .heart::after {
-                top: -50%;
             }
 
             a:link {color : black; text-decoration:none;}
