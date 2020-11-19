@@ -26,64 +26,17 @@
             table .even{
                 background: #efefef;
             }
-            .button{
-                width: 100px;
-                height: 20px;
-                text-align: center;
-                margin-top:8px;
-            }
-            .button1{
+            .button0{
                 height: 32px;
-                width: 90px;
-                font-size: 13px;
+                width: 32px;
+                font-size: 20px;
                 text-align: center;
+                color:red;
                 margin-bottom: 5px;
-                background-color: white;
-                border: 2px solid black;
-                border-radius: 4px
-
-            }
-            .button2{
-                height: 30px;
-                width: 120px;
-                font-size: 13px;
-                text-align: center;
-                margin-bottom: 5px;
-                background-color: white;
-                border: 2px solid black;
-                border-radius: 4px
-
-            }
-            .text {
-                font-size: 15px;
-                padding-top:20px;
-                text-align:center;
-            }
-            .text:hover{
-                text-decoration: underline;
-            }
-
-            .heart {
-                width: 500px;
-                height: 500px;
-                background: #ea2027;
-                position: relative;
-                transform: rotate(45deg);
-            }
-            .heart::before,
-            .heart::after {
-                content: "";
-                width: 500px;
-                height: 500px;
-                position: absolute;
-                border-radius: 50%;
-                background: #ea2027;
-            }
-            .heart::before {
-                left: -50%;
-            }
-            .heart::after {
-                top: -50%;
+                background: 0;
+                border: 0;
+                border-radius: 4px;
+                outline: 0;
             }
 
             a:link {color : black; text-decoration:none;}
@@ -147,7 +100,7 @@
                         <td width = "100" align = "center">작성자</td>
                         <td width = "200" align = "center">날짜</td>
                         <td width = "50" align = "center">조회수</td>
-                        <td width = "80" align = "center">테스트찜</td>
+                        <td width = "80" align = "center">찜 수</td>
                         <td width = "80" align = "center">찜</td>
                     </tr>
                     </thead>
@@ -198,13 +151,13 @@
                                     <?php
                                     if ($rows4['testScYN']){ ?>
                                         <form method = "post">
-                                            <input class = "button1" type="button" name="insertscrap" value = "찜취소" onclick = "location.href= '../mainPage/testScrap2.php?scrap=1&testIdx=<?php echo $rows['testIdx']?>'">
+                                            <input class = "button0" type="button" name="insertscrap" value = "❤" onclick = "location.href= '../mainPage/testScrap2.php?scrap=1&testIdx=<?php echo $rows['testIdx']?>'">
                                         </form>
 
                                         <?php
                                     }else{?>
                                         <form method = "post">
-                                            <input class = "button1" type = "button"  name="deletescrap"  value = "찜하기" onclick = "location.href= '../mainPage/testScrap2.php?scrap=0&testIdx=<?php echo $rows['testIdx']?>'">
+                                            <input class = "button0" type = "button"  name="deletescrap"  value = "♡" onclick = "location.href= '../mainPage/testScrap2.php?scrap=0&testIdx=<?php echo $rows['testIdx']?>'">
                                         </form>
                                         <?php
                                     }

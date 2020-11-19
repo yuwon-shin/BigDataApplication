@@ -47,13 +47,6 @@
             border-bottom: 1px solid #efefef;
             padding: 10px;
         }
-        .button{
-            width: 400px;
-            height: 23px;
-            text-align: center;
-            margin: auto;
-
-        }
         .wrap {
             position : relative;
             display: flex;
@@ -116,8 +109,7 @@
     <div align="center">
         나<input type="checkbox" name="me" <?php if (isset($_POST['me']) and $_POST['me']='on'){ ?>checked='checked'<?php }else{} ?>>
         여자<input type="checkbox" name="girl" <?php if (isset($_POST['girl']) and $_POST['girl']='on'){ ?>checked='checked'<?php }else{} ?>>
-        남자<input type="checkbox" name="boy" <?php if (isset($_POST['boy']) and $_POST['boy']='on'){ ?>checked='checked'<?php }else{} ?>>
-        <br><br>
+        남자<input type="checkbox" name="boy" <?php if (isset($_POST['boy']) and $_POST['boy']='on'){ ?>checked='checked'<?php }else{} ?>>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
         <input class = "button1"type=submit value="결과보기">
         <br><br>
     </div>
@@ -133,6 +125,23 @@ else{$_POST['boy']=0;}
 if(isset($_POST['girl'])){$_POST['girl']='on';}
 else{$_POST['girl']=0;}
 ?>
+
+
+<table align="center">
+    <tr align="center">
+        <td><div class = circle1></div></td>
+        <td><div class = circle2></div></td>
+        <td><div class = circle0></div></td>
+    </tr>
+
+    <tr align="center">
+        <td>나</td>
+        <td>여자</td>
+        <td>남자</td>
+    </tr>
+</table>
+
+<br>
 
 
 <table style = "padding-top:20px" align = center>

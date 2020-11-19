@@ -30,13 +30,6 @@ $rows=mysqli_fetch_assoc($res);
             border-bottom: 1px solid #efefef;
             padding: 10px;
         }
-        .button{
-            width: 400px;
-            height: 23px;
-            text-align: center;
-            margin: auto;
-
-        }
         .button1{
             height: 60px;
             width: 150px;
@@ -60,7 +53,7 @@ $rows=mysqli_fetch_assoc($res);
             width: 30px;
             height: 30px;
             border-radius: 50%;
-            background: #CC3D3D;
+            background: gray;
             line-height: 30px;
             text-align: center;
         }
@@ -71,6 +64,45 @@ $rows=mysqli_fetch_assoc($res);
 
 <body>
 <br><h1 align = center>연령 별 결과 분석<br><br></h1>
+
+
+<?php
+if(isset($_POST['memberAge'])){
+}else{
+    $_POST['memberAge']=$_SESSION['ses_age'];
+}
+?>
+
+<form name="memberAge" method="POST" action="resultAge.php?testIdx=<?=$testIdx?>">
+    <div align="center">
+        비교할 연령을 입력해주세요
+        <input type="text" size="30" name="memberAge" value=<?php echo $_POST['memberAge'];?>>
+        <input class = "button1" type=submit value="결과보기">
+
+        <br>
+
+    </div>
+
+</form>
+
+<br>
+
+<table align="center">
+    <tr>
+        <td align="center"><div class = circle></div></td>
+        <td align="center"><div class = circle style="background: #FAE0D4;"></div></td>
+    </tr>
+
+    <tr>
+        <td align="center">나</td>
+        <td align="center"><?php echo $_POST['memberAge'];?>세</td>
+    </tr>
+</table>
+
+
+
+
+
 <table style = "padding-top:20px" align = center>
     <thead>
     <tr>
@@ -88,20 +120,6 @@ $rows=mysqli_fetch_assoc($res);
 
     <tbody>
 
-    <?php
-    if(isset($_POST['memberAge'])){
-    }else{
-        $_POST['memberAge']=$_SESSION['ses_age'];
-    }
-    ?>
-
-    <form name="memberAge" method="POST" action="resultAge.php?testIdx=<?=$testIdx?>">
-        <div align="center">
-            비교할 연령을 입력해주세요
-            <input type="text" size="30" name="memberAge" value=<?php echo $_POST['memberAge'];?>>
-            <input class = "button1"type=submit value="결과보기">
-        </div>
-    </form>
 
     <br>
 

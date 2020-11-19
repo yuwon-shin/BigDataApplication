@@ -19,6 +19,7 @@ for($i=0;$i<count($jobs);$i=$i+1){
     ${'rows'.$i} = mysqli_fetch_assoc(${'res'.$i});
 }
 
+$colors = array("#FFD8D8","#FAE0D4","#FAF4C0","#D9E5FF","#DAD9FF","#FFD9EC","#EAEAEA");
 
 ?>
 
@@ -46,7 +47,7 @@ for($i=0;$i<count($jobs);$i=$i+1){
             width: 30px;
             height: 30px;
             border-radius: 50%;
-            background: #CC3D3D;
+            background: gray;
             line-height: 30px;
             text-align: center;
         }
@@ -87,12 +88,36 @@ for($i=0;$i<count($jobs);$i=$i+1){
         for($i=0;$i<count($jobs);$i=$i+1){
         echo $jobs[$i]?>
         <input type=checkbox name="<?php echo $jobs[$i]?>" <?php if (isset($_POST[$jobs[$i]]) and $_POST[$jobs[$i]]='on'){ ?>checked='checked'<?php }else{} ?>>
-        <?php } ?>
-        <br><br>
+        <?php } ?>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
         <input class = "button1" type=submit value="결과보기">
         <br><br>
     </div>
 </form>
+
+
+<table align="center">
+    <tr>
+        <td align="center"><div class = circle></div></td>
+        <?php
+        for($i=0;$i<7;$i=$i+1){
+            ?><td align="center"><div class = circle style='background:<?php echo $colors[$i]?>'></div></td><?php
+        }
+        ?>
+    </tr>
+
+    <tr>
+        <td align="center">나</td>
+        <td align="center">이공계열</td>
+        <td align="center">인문계열</td>
+        <td align="center">사회계열</td>
+        <td align="center">의약계열</td>
+        <td align="center">예체능계열</td>
+        <td align="center">교육계열</td>
+        <td align="center">직장인계열</td>
+    </tr>
+</table>
+
+<br>
 
 <?php
 for($i=0;$i<count($jobs);$i=$i+1){
@@ -123,7 +148,8 @@ else{$_POST['me']=0;}
 
     <?php
     $i=1;
-    $colors = array("#FFD8D8","#FAE0D4","#FAF4C0","#D9E5FF","#DAD9FF","#FFD9EC","#EAEAEA");
+
+
     while($i < 11){
         ?>
         <tr>

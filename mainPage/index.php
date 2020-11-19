@@ -108,28 +108,6 @@ include '../include/session.php';
             text-decoration: underline;
         }
 
-        .heart {
-            width: 500px;
-            height: 500px;
-            background: #ea2027;
-            position: relative;
-            transform: rotate(45deg);
-        }
-        .heart::before,
-        .heart::after {
-            content: "";
-            width: 500px;
-            height: 500px;
-            position: absolute;
-            border-radius: 50%;
-            background: #ea2027;
-        }
-        .heart::before {
-            left: -50%;
-        }
-        .heart::after {
-            top: -50%;
-        }
         .wrap {
             display: flex;
             flex-direction: column;
@@ -315,40 +293,62 @@ if(isset($_SESSION['ses_index'])){
 </div>
 
 <?php
-$query4 = "SELECT t.testIdx as testIdx, `testTitle`, `testCategory`, `hit`, r.scrapNm as scrap 
-from tbTest  as t 
-inner join(select sc.tbTest_testIdx as idx, count(sc.testScrapIdx) as scrapNm from 
-(select tbTest_testIdx from tbTestScrap s left outer join tbMember m on s.tbMember_memberIdx = memberIdx 
+$query4 = "select re.testIdx,re.testTitle,re.testCategory,re.hit,count(csc.testScrapIdx) as scrap from 
+(select tbTest.testIdx,tbTest.testTitle,tbTest.testCategory,tbTest.hit,r.scrapNm as scrap from 
+(select * from (select tbTest_testIdx as idx,count(otherscrap.testScrapIdx) as scrapNm from 
+(select myscTest,sc.testScrapIdx,sc.tbMember_memberIdx from (select tbTest_testIdx as myscTest from tbTestScrap s 
+left outer join tbMember m 
+on s.tbMember_memberIdx = memberIdx 
 where m.memberIdx= {$_SESSION['ses_index']}) as mytest 
 left outer join tbTestScrap sc 
-on mytest.tbTest_testIdx = sc.tbTest_testIdx 
-where sc.tbMember_memberIdx!={$_SESSION['ses_index']} 
-group by sc.tbTest_testIdx) r 
-on t.testIdx = r.idx order by scrap limit 3";
+on mytest.myscTest = sc.tbTest_testIdx 
+where sc.tbMember_memberIdx!={$_SESSION['ses_index']}) as sameTest
+left outer join tbTestScrap otherscrap
+on sameTest.tbMember_memberIdx=otherscrap.tbMember_memberIdx
+group by tbTest_testIdx) as result
+where idx not in (select tbTest_testIdx from tbTestScrap where tbMember_memberIdx={$_SESSION['ses_index']})
+order by scrapNm desc limit 3) r
+left outer join tbTest 
+on r.idx=tbTest.testIdx) re
+left outer join tbTestScrap csc
+on re.testIdx=csc.tbTest_testIdx
+group by tbTest_testIdx;";
 $res5 = mysqli_query($conn, $query4);
 
 
-$query5 = "SELECT t.testIdx as testIdx, `testTitle`, `testCategory`, `hit`, r.scrapNm as scrap 
+$query5 = "select re.testIdx,re.testTitle,re.testCategory,re.hit,count(csc.testScrapIdx) as scrap from
+(SELECT t.testIdx as testIdx, `testTitle`, `testCategory`, `hit`, r.scrapNm as scrap 
 from tbTest as t 
 inner join(select s.tbTest_testIdx as idx ,count(testScrapIdx) as scrapNm 
 from tbTestScrap s 
 left outer join tbMember m 
 on s.tbMember_memberIdx = memberIdx where m.memberSex= '{$_SESSION['ses_sex']}'
 group by s.tbTest_testIdx) r 
-on t.testIdx = r.idx order by scrap desc limit 3";
+on t.testIdx = r.idx order by scrap desc limit 3 ) re
+left outer join tbTestScrap csc
+on re.testIdx=csc.tbTest_testIdx
+group by tbTest_testIdx";
 $res6 = mysqli_query($conn, $query5);
 
-$query6 = "SELECT t.testIdx as testIdx, `testTitle`, `testCategory`, `hit`, r.scrapNm as scrap 
+$query6 = "select re.testIdx,re.testTitle,re.testCategory,re.hit,count(csc.testScrapIdx) as scrap from
+(SELECT t.testIdx as testIdx, `testTitle`, `testCategory`, `hit`, r.scrapNm as scrap 
 from tbTest as t 
 inner join(select s.tbTest_testIdx as idx ,count(testScrapIdx) as scrapNm from tbTestScrap s 
 left outer join tbMember m on s.tbMember_memberIdx = memberIdx where m.memberAge= '{$_SESSION['ses_age']}'
-group by s.tbTest_testIdx) r on t.testIdx = r.idx order by scrap desc limit 3";
+group by s.tbTest_testIdx) r on t.testIdx = r.idx order by scrap desc limit 3) re
+left outer join tbTestScrap csc
+on re.testIdx=csc.tbTest_testIdx
+group by tbTest_testIdx";
 $res7 = mysqli_query($conn, $query6);
 
-$query7 = "SELECT t.testIdx as testIdx, `testTitle`, `testCategory`, `hit`, r.scrapNm as scrap
+$query7 = "select re.testIdx,re.testTitle,re.testCategory,re.hit,count(csc.testScrapIdx) as scrap from
+(SELECT t.testIdx as testIdx, `testTitle`, `testCategory`, `hit`, r.scrapNm as scrap
  from tbTest as t inner join(select s.tbTest_testIdx as idx ,count(testScrapIdx) as scrapNm from tbTestScrap s 
  left outer join tbMember m on s.tbMember_memberIdx = memberIdx where m.memberJob= '{$_SESSION['ses_job']}'
-    group by s.tbTest_testIdx ) r on t.testIdx = r.idx order by scrap desc limit 3";
+    group by s.tbTest_testIdx ) r on t.testIdx = r.idx order by scrap desc limit 3) re
+left outer join tbTestScrap csc
+on re.testIdx=csc.tbTest_testIdx
+group by tbTest_testIdx";
 $res8 = mysqli_query($conn, $query7);
 ?>
 
@@ -358,7 +358,7 @@ $res8 = mysqli_query($conn, $query7);
     <div class = container>
 
     <h2><font color = #495057><b>&nbsp;&nbsp;[개인 맞춤형 테스트 추천]</b></font></h2><br>
-    <h3 align = left><font color = #868e96><b>&nbsp;&nbsp;&nbsp;&nbsp;다른 사람들은 내가 찜한 테스트 중, 어떤 테스트를 찜했을까?</b></font></h3>
+    <h3 align = left><font color = #868e96><b>&nbsp;&nbsp;&nbsp;&nbsp;나와 취향이 비슷한 사람들은 어떤 테스트를 많이 찜했을까? (나와 같은 테스트를 찜한 사람들)</b></font></h3>
     <div class = container1 >
         <table  algin = center>
             <thead>

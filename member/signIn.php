@@ -45,22 +45,15 @@
             background-color: white; 
             padding: 30px;
         }
-       .button{
-            width: 100px;
-            height: 20px;
-            text-align: center;
-            margin: auto;
-            margin-top:8px;
-            }
-            .button1{
-            height: 35px;
-            width: 90px;
-            font-size: 13px;
-            color: white;
-            text-align: center;
-            background-color: black;
-            border: 3px solid #373737;
-            border-radius: 8px
+        .button1{
+        height: 35px;
+        width: 90px;
+        font-size: 13px;
+        color: white;
+        text-align: center;
+        background-color: black;
+        border: 3px solid #373737;
+        border-radius: 8px
 
         }
     </style>

@@ -41,7 +41,7 @@ else{
 
                 break;
 
-            case "좋아요하기":
+            case "♡":
                 echo "좋아요하기";
                 $sql2 = "insert into tbComLike (tbMember_memberIdx,tbComment_commentIdx) values ('".$_SESSION['ses_index']."', '".$commentIdx."')";
                 $res2 = mysqli_query($conn,$sql2);
@@ -53,7 +53,7 @@ else{
                 }
                 break;
 
-            case "좋아요취소":
+            case "❤":
                 echo "좋아요취소하기";
                 $sql3 = "delete from tbComLike where tbMember_memberIdx = '".$_SESSION['ses_index']."' and tbComment_commentIdx= '".$commentIdx."'";
                 $res3 = mysqli_query($conn,$sql3);
@@ -94,7 +94,7 @@ else{
 
                 break;
 
-            case "좋아요하기":
+            case "♡":
                 echo "좋아요하기";
                 $sql2 = "insert into tbComLike (tbMember_memberIdx,tbComment_commentIdx) values ('".$_SESSION['ses_index']."', '".$commentIdx."')";
                 $res2 = mysqli_query($conn,$sql2);
@@ -106,7 +106,7 @@ else{
                 }
                 break;
 
-            case "좋아요취소":
+            case "❤":
                 echo "좋아요취소하기";
                 $sql3 = "delete from tbComLike where tbMember_memberIdx = '".$_SESSION['ses_index']."' and tbComment_commentIdx= '".$commentIdx."'";
                 $res3 = mysqli_query($conn,$sql3);

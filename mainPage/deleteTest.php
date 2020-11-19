@@ -27,7 +27,7 @@ else{
     } elseif($delete==0) {
         mysqli_rollback($conn); ?>
         <script>
-            alert("<?php echo "테스트 삭제가 최소되었습니다."?>");
+            alert("<?php echo "테스트 삭제가 취소되었습니다."?>");
             location.replace('./index.php');
 
         </script>

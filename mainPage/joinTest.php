@@ -53,6 +53,18 @@
                 margin: auto;
 
             }
+            .button0{
+                height: 32px;
+                width: 32px;
+                font-size: 20px;
+                text-align: center;
+                color:red;
+                margin-bottom: 5px;
+                background: 0;
+                border: 0;
+                border-radius: 4px;
+                outline: 0;
+            }
             .button1{
                 height: 40px;
                 width: 100px;
@@ -79,24 +91,16 @@
             border: 2px solid black;
             border-radius: 4px
 
-        }
-        .button4{
-            height: 37px;
-            width: 120px;
-            font-size: 15px;
-            text-align: center;
-            background-color: #ccc;
-            border: 2.5px solid black;
-            border-radius: 10px
-        }
-        .button5{
-            font-size: 13px;
-            text-align: center;
-            background-color: white;
-            border: 2px solid black;
-            border-radius: 4px
-
-        }
+            }
+            .button4{
+                height: 37px;
+                width: 120px;
+                font-size: 15px;
+                text-align: center;
+                background-color: #ccc;
+                border: 2.5px solid black;
+                border-radius: 10px
+            }
             .wrap {
                 display: flex;
                 flex-direction: column;
@@ -221,10 +225,10 @@
         <?php
         $query4 = "select t.testIdx, t.testTitle,t.testCategory,t.hit, tbnew.answerNm  from (
                     select a.tbTest_testIdx, count(a.answerIdx) as answerNm from (select answerIdx,tbTest_testIdx,tbMember_memberIdx from tbAnswer
-                    where tbTest_testIdx = 4) as testMember
+                    where tbTest_testIdx = $testIdx) as testMember
                     left outer join tbAnswer a
                     on testMember.tbMember_memberIdx = a.tbMember_memberIdx
-                    where a.tbMember_memberIdx!=7 and a.tbTest_testIdx!=4
+                    where a.tbMember_memberIdx!={$_SESSION['ses_index']} and a.tbTest_testIdx!=$testIdx
                     group by a.tbTest_testIdx
                     order by answerNm desc) as tbnew
                     left outer join tbTest t
@@ -351,7 +355,7 @@
                         <td height=30 width = "200" align="center" bgcolor=#ccc><font color=white >등록 날짜</font></td>
                         <td height=30 width = "700" align="center" bgcolor=#ccc><font color=white >댓글</font></td>
                         <td height=30 width = "100" align="center" bgcolor=#ccc><font color=white >작성자</font></td>
-                        <td height=30 width = "100" align="center" bgcolor=#ccc><font color=white >좋아요수</font></td>
+                        <td height=30 width = "100" align="center" bgcolor=#ccc><font color=white >좋아요 수</font></td>
                         <td height=30 width = "150" align="center" bgcolor=#ccc><font color=white >좋아요</font></td>
                         <td height=30 width = "50" align="center" bgcolor=#ccc><font color=white >&nbsp;&nbsp;</font></td>
                     </tr>
@@ -389,19 +393,19 @@
                         if(isset($_SESSION['ses_user'])){
                         if ($rows3['comLikeYN']){ ?>
                         <td width = "150" align = "center"><form action = 'comment.php?testIdx=<?php echo $testIdx?>&commentIdx=<?php echo $rows['commentIdx']?>' method = "post">
-                            <input class = "button5"  style = "margin-top: 10px" height = 80% width = 80% type="submit" name="comment" value = "좋아요취소" >
+                            <input class = "button0"  style = "margin-top: 10px" height = 80% width = 80% type="submit" name="comment" value = "❤" >
                         </form></td>
 
                         <?php
                         }else{?>
                         <td width = "150" align = "center"><form action = 'comment.php?testIdx=<?php echo $testIdx?>&commentIdx=<?php echo $rows['commentIdx']?>' method = "post">
-                            <input class = "button5" style = "margin-top: 10px" height = 80% width = 80% type = "submit" name="comment"  value = "좋아요하기">
+                            <input class = "button0" style = "margin-top: 10px" height = 80% width = 80% type = "submit" name="comment"  value = "♡">
                         </form></td>
                         <?php
                         }  
                         }else{  ?>
                             <td  width = "150" align = "center"><form action = 'comment.php?testIdx=<?php echo $testIdx?>&commentIdx=<?php echo $rows['commentIdx']?>' method = "post">
-                            <input class = "button5" style = "margin-top: 10px" height = 80% width = 80% type = "submit" name="comment"  value = "좋아요하기" disabled>
+                            <input class = "button0" style = "margin-top: 10px" height = 80% width = 80% type = "submit" name="comment"  value = "♡" disabled>
                         </form></td>
                         <?php
                         }
