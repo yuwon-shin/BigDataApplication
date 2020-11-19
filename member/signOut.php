@@ -40,6 +40,16 @@
             background-color: white; 
             padding: 30px;
         }
+        .button{
+            height: 35px;
+            width: 90px;
+            font-size: 13px;
+            color: white;
+            text-align: center;
+            background-color: black;
+            border: 3px solid #373737;
+            border-radius: 8px
+        }
        
     </style>
 </head>
@@ -55,10 +65,18 @@
 
 				    if($_SESSION['ses_user']){
 				    	unset($_SESSION['ses_user']);
+				    	unset($_SESSION['ses_name']);
+                        unset($_SESSION['ses_index']);
+                        unset($_SESSION['ses_email']);
+                        unset($_SESSION['ses_pw']);
+                        unset($_SESSION['ses_sex']);
+                        unset($_SESSION['ses_age']);
+                        unset($_SESSION['ses_job']);
 				        echo "<script> alert('로그아웃 완료'); self.close(); </script>";
-				        echo '<input type = "button" value = "메인페이지로" onclick = "location.href= \'../mainPage/index.php\'">';
-				    }
-				?> 
+				        
+				    }?> 
+                    <input class = "button" type = "button" value = "메인페이지" onclick = "location.href= '../mainPage/index.php'">
+				
 			</div>
 		</div>
 	</div>

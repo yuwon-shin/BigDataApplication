@@ -7,6 +7,9 @@ include "../include/dbConnect.php";
  $memberPw2=$_POST['memberPw2'];
  $memberName=$_POST['memberName'];
  $memberNickName=$_POST['memberNickName'];
+ $memberSex = $_POST['memberSex'];
+ $memberAge = $_POST['memberAge'];
+ $memberJob = $_POST['memberJob'];
  ?>
 
 
@@ -49,6 +52,17 @@ include "../include/dbConnect.php";
             background-color: white; 
             padding: 30px;
         }
+        .button{
+            height: 35px;
+            width: 90px;
+            font-size: 13px;
+            color: white;
+            text-align: center;
+            background-color: black;
+            border: 3px solid #373737;
+            border-radius: 8px
+
+        }
        
     </style>
 </head>
@@ -60,19 +74,19 @@ include "../include/dbConnect.php";
 			 <?php
 
 			 //이메일 중복 검사
-			 $sql = "SELECT * FROM tbMemeber WHERE memberEmail = '{$memberEmail}'";
+			 $sql = "SELECT * FROM tbMember WHERE memberEmail = '{$memberEmail}'";
 			 $res = mysqli_query($conn, $sql);
-			 if($res){
-			 	 echo "이미 가입된 이메일입니다.<br><br><br>";
-			 	 echo '<input type = "button" value = "돌아가기" onclick = "location.href= \'./signUp.php\'">';
-			 	exit();
+			 if(mysqli_num_rows($res)>=1){
+			 	 echo "이미 가입된 이메일입니다.<br><br><br>"; ?>
+			 	 <input class = "button" type = "button" value = "돌아가기" onclick = "location.href= './signUp.php'">
+			 <?php	exit();
 			 }
 
 			//비밀번호 일치 여부 확인
 			if($memberPw !== $memberPw2){
-				echo "비밀번호가 일치하지 않습니다.<br><br><br>";
-				echo '<input type = "button" value = "돌아가기" onclick = "location.href= \'./signUp.php\'">';
-				exit();
+				echo "비밀번호가 일치하지 않습니다.<br><br><br>"; ?>
+			 	 <input class = "button" type = "button" value = "돌아가기" onclick = "location.href= './signUp.php'">
+			 <?php	exit();
 			}
 			else{
 				$memberPw = md5($memberPw);   //비밀번호 암호화
@@ -80,34 +94,37 @@ include "../include/dbConnect.php";
 
 			//누락된 정보 확인
 			if($memberName == '' || $memberEmail == '' || $memberPw == '' || $memberPw2 == ''){
-				echo "모든 정보를 기입해주세요.<br><br><br>";
-				echo '<input type = "button" value = "돌아가기" onclick = "location.href= \'./signUp.php\'">';
-				exit();
+				echo "모든 정보를 기입해주세요.<br><br><br>";?>
+			 	 <input class = "button" type = "button" value = "돌아가기" onclick = "location.href= './signUp.php'">
+			 <?php	exit();
 			}
 
 			//이메일 주소가 유효한지 확인
 			$checkEmail = filter_var($memberEmail, FILTER_VALIDATE_EMAIL);
 			if($checkEmail != true){
-				echo "올바른 이메일 주소가 아닙니다.<br><br><br>";
-				echo '<input type = "button" value = "돌아가기" onclick = "location.href= \'./signUp.php\'">';
-				exit();
+				echo "올바른 이메일 주소가 아닙니다.<br><br><br>";?>
+			 	 <input class = "button" type = "button" value = "돌아가기" onclick = "location.href= './signUp.php'">
+			 <?php	exit();
 			}
 			?>
 
 			<?php
 
 
-			 $sql = "insert into tbMember (memberName, memberNickName, memberEmail, memberPw) values('$memberName','$memberNickName', '$memberEmail','$memberPw')";
+			 $sql = "insert into tbMember (memberName, memberNickName, memberEmail, memberPw, memberAge, memberSex, memberJob)
+                    values('$memberName','$memberNickName', '$memberEmail','$memberPw', '$memberAge','$memberSex','$memberJob')";
 			 $res = mysqli_query($conn, $sql);
 			 if($res){
-			  echo '회원가입이 완료되었습니다. <br><br><br>'; //로그인 페이지 연동
-			  echo '<input type = "button" value = "로그인" onclick = "location.href= \'./main.php\'">';
-			 }
+			  echo '회원가입이 완료되었습니다. <br><br><br>';?> 
+			  <input class = "button" type = "button" value = "로그인" onclick = "location.href= './main.php'">
+			 <?php 
+			}
 			 else{
-			  echo '회원가입이 제대로 되지 않았습니다. 다시 시도해주세요.<br><br><br>';
-			  echo '<input type = "button" value = "돌아가기" onclick = "location.href= \'./signUp.php\'">';
-			 }
+			  echo '회원가입이 제대로 되지 않았습니다. 다시 시도해주세요.<br><br><br>';?>
+			 	 <input class = "button" type = "button" value = "돌아가기" onclick = "location.href= './signUp.php'">
 
+			 <?php	
+			}
 			 mysqli_close($conn);
 
 			?>
@@ -117,5 +134,5 @@ include "../include/dbConnect.php";
 
 	
 </div>
-
+</body>
 </html>
